@@ -23,7 +23,7 @@ for db in ["facdb_datasources", "facdb_uid_key", "dcp_facilities_togeocode"]:
     task = BashOperator(
         task_id='facdB_data_loader_' + db,
         bash_command="npm run get {0} --prefix=~/scripts/data-loader-scripts".format(db),
-        dag=dag)
+        dag=DAG_data_loader)
 
 
 # FacDB controller dag
