@@ -1,6 +1,8 @@
-from airflow.operators import BashOperator
+from airflow.operators.BashOperator import BashOperator
 from airflow.models import DAG
 from datetime import datetime, timedelta
+
+import data_sources
 
 default_args = {
     'owner': 'airflow',
@@ -19,10 +21,10 @@ DAG_data_loader = DAG(
     default_args=default_args
 )
 
-for db in ["facdb_datasources", "facdb_uid_key", "dcp_facilities_togeocode"]:
+for source in data_sources.facdb:
     task = BashOperator(
-        task_id='facdB_data_loader_' + db,
-        bash_command="npm run get {0} --prefix=~/scripts/data-loader-scripts".format(db),
+        task_id=source,
+        bash_command="npm run get {0} --prefix=~/scripts/data-loader-scripts".format(source),
         dag=DAG_data_loader)
 
 
