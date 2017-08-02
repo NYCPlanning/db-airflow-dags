@@ -22,20 +22,25 @@ DAG_data_loader = DAG(
 )
 
 for source in data_sources.facdb:
-    task = BashOperator(
-        task_id=source,
+    get = BashOperator(
+        task_id='get_' + source,
         bash_command="npm run get {0} --prefix=~/scripts/data-loader-scripts".format(source),
         dag=DAG_data_loader)
 
+    preprocess = BashOperator(
+        task_id='preprocess_' + source,
+        bash_command="npm run preprocess {0} --prefix=~/scripts/data-loader-scripts".format(source),
+        dag=DAG_data_loader)
+    preprocess.set_upstream(get)
 
-# FacDB controller dag
-# dag_facdb = DAG(
-#     'facdb',
-#     default_args=default_args
-# )
-#
-# t1 = BashOperator(
-#     task_id='testairflow',
-#     bash_command='cd ~/scripts/civic-data-loader/ && node loader get bic_facilities_tradewaste',
-#     dag=dag
-# )
+    push = BashOperator(
+        task_id='push_' + source,
+        bash_command="npm run push {0} --prefix=~/scripts/data-loader-scripts".format(source),
+        dag=DAG_data_loader)
+    push.set_upstream(preprocess)
+
+    after = BashOperator(
+        task_id='after_' + source,
+        bash_command="npm run after {0} --prefix=~/scripts/data-loader-scripts".format(source),
+        dag=DAG_data_loader)
+    after.set_upstream(push)
