@@ -24,23 +24,23 @@ DAG_data_loader = DAG(
 for source in data_sources.facdb:
     get = BashOperator(
         task_id='get_' + source,
-        bash_command="npm run get {0} --prefix=~/scripts/data-loader-scripts".format(source),
+        bash_command="npm run get {0} --prefix=~/scripts/data-loading-scripts".format(source),
         dag=DAG_data_loader)
 
     preprocess = BashOperator(
         task_id='preprocess_' + source,
-        bash_command="npm run preprocess {0} --prefix=~/scripts/data-loader-scripts".format(source),
+        bash_command="npm run preprocess {0} --prefix=~/scripts/data-loading-scripts".format(source),
         dag=DAG_data_loader)
     preprocess.set_upstream(get)
 
     push = BashOperator(
         task_id='push_' + source,
-        bash_command="npm run push {0} --prefix=~/scripts/data-loader-scripts".format(source),
+        bash_command="npm run push {0} --prefix=~/scripts/data-loading-scripts".format(source),
         dag=DAG_data_loader)
     push.set_upstream(preprocess)
 
     after = BashOperator(
         task_id='after_' + source,
-        bash_command="npm run after {0} --prefix=~/scripts/data-loader-scripts".format(source),
+        bash_command="npm run after {0} --prefix=~/scripts/data-loading-scripts".format(source),
         dag=DAG_data_loader)
     after.set_upstream(push)
