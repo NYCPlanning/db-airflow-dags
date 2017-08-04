@@ -26,8 +26,5 @@ for file in os.listdir(insert_dir):
         PostgresOperator(
             task_id='insert_' + file[:-4],
             postgres_conn_id='postgres_default',
-            sql=insert_dir + "/" + file,
+            sql=os.path.join(insert_dir, file),
             dag=facdb_assembly)
-
-
-        print(os.path.join("/mydir", file))
