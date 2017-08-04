@@ -20,7 +20,7 @@ facdb_assembly = DAG(
     default_args=default_args
 )
 
-for file in os.listdir("~/scripts/facilities-db/assembly/insert"):
+for file in os.listdir("~/scripts/facilities-db/2_assembly/insert"):
     if file.endswith(".sql"):
         PostgresOperator(
             postgres_conn_id='postgres_default',
