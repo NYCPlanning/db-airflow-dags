@@ -36,29 +36,28 @@ facdb = [
     "usdot_facilities_airports",
     "usdot_facilities_ports",
     "usnps_facilities_parks",
+
+    # ---
+    "acs_facilities_daycareheadstart",
+    "dcas_facilities_colp",
+    "dhs_facilities_shelters",
+    "doe_facilities_schoolsbluebook",
+    "dot_facilities_pedplazas",
+    "dot_facilities_parkingfacilities",
+    "dot_facilities_bridgehouses",
+    "dot_facilities_ferryterminalslandings",
+    "dot_facilities_mannedfacilities",
+    "dsny_facilities_mtsgaragemaintenance",
+    "foodbankny_facilities_foodbanks",
+    "hhs_facilities_fmscontracts",
+    "hhs_facilities_financialscontracts",
+    "hhs_facilities_proposals",
+    "nysoasas_facilities_programs", ## Being shared with us monthly by email in xlsx
+    "nysed_facilities_activeinstitutions", ## Actually is open but need to figue out url
+    "nysed_nonpublicenrollment", ## Actually is open but in xlsx that needs to be formatted
+    "omb_facilities_libraryvisits",
+    "dycd_facilities_compass",
+    "dycd_facilities_otherprograms",
+    "hra_facilities_centers",
+    "sbs_facilities_workforce1",
 ]
-
-
-#
-# acs_facilities_daycareheadstart
-# dcas_facilities_colp
-# dhs_facilities_shelters
-# doe_facilities_schoolsbluebook
-# dot_facilities_pedplazas
-# dot_facilities_parkingfacilities
-# dot_facilities_bridgehouses
-# dot_facilities_ferryterminalslandings
-# dot_facilities_mannedfacilities
-# dsny_facilities_mtsgaragemaintenance
-# foodbankny_facilities_foodbanks
-# hhs_facilities_fmscontracts
-# hhs_facilities_financialscontracts
-# hhs_facilities_proposals
-# nysoasas_facilities_programs ## Being shared with us monthly by email in xlsx
-# nysed_facilities_activeinstitutions ## Actually is open but need to figue out url
-# nysed_nonpublicenrollment ## Actually is open but in xlsx that needs to be formatted
-# omb_facilities_libraryvisits
-# dycd_facilities_compass
-# dycd_facilities_otherprograms
-# hra_facilities_centers
-# sbs_facilities_workforce1

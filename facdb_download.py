@@ -11,13 +11,13 @@ default_args = {
     'email': ['jpichot@planning.nyc.gov'],
     'email_on_failure': True,
     'email_on_retry': False,
-    'retries': 5,
+    'retries': 1,
     'retry_delay': timedelta(minutes=5),
 }
 
 # Data Loading Scripts
-DAG_data_loader = DAG(
-    'facdb_data_loader',
+facbdb_download = DAG(
+    'facdb_download',
     default_args=default_args
 )
 
@@ -25,22 +25,22 @@ for source in data_sources.facdb:
     get = BashOperator(
         task_id='get_' + source,
         bash_command="npm run get {0} --prefix=~/scripts/data-loading-scripts".format(source),
-        dag=DAG_data_loader)
+        dag=facbdb_download)
 
     preprocess = BashOperator(
         task_id='preprocess_' + source,
         bash_command="npm run preprocess {0} --prefix=~/scripts/data-loading-scripts".format(source),
-        dag=DAG_data_loader)
+        dag=facbdb_download)
     preprocess.set_upstream(get)
 
     push = BashOperator(
         task_id='push_' + source,
         bash_command="npm run push {0} --prefix=~/scripts/data-loading-scripts".format(source),
-        dag=DAG_data_loader)
+        dag=facbdb_download)
     push.set_upstream(preprocess)
 
     after = BashOperator(
         task_id='after_' + source,
         bash_command="npm run after {0} --prefix=~/scripts/data-loading-scripts".format(source),
-        dag=DAG_data_loader)
+        dag=facbdb_download)
     after.set_upstream(push)
