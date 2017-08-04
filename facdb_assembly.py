@@ -20,12 +20,13 @@ facdb_assembly = DAG(
     default_args=default_args
 )
 
-for file in os.listdir("/home/airflow/scripts/facilities-db/2_assembly/insert"):
+insert_dir = "/home/airflow/scripts/facilities-db/2_assembly/insert"
+for file in os.listdir(insert_dir):
     if file.endswith(".sql"):
         PostgresOperator(
             task_id='insert_' + file[:-4],
             postgres_conn_id='postgres_default',
-            sql=file,
+            sql=insert_dir + "/" + file,
             dag=facdb_assembly)
 
 
