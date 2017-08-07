@@ -1,4 +1,5 @@
 from airflow.operators.bash_operator import BashOperator
+from airflow.operators.email_operator import EmailOperator
 from airflow.models import DAG
 from airflow.models import Variable
 from airflow.utils.file import TemporaryDirectory
@@ -25,6 +26,13 @@ facbdb_download = DAG(
     default_args=default_args
 )
 
+email_started = EmailOperator(
+    to=['jpichot@planning.nyc.gov'],
+    subject='[Airflow] FacDB Download Triggered',
+    html_content='FacDB Download DAG triggered',
+    dag=facbdb_download
+)
+
 for source in data_sources.facdb:
     get = BashOperator(
         task_id='get_' + source,
@@ -35,6 +43,7 @@ for source in data_sources.facdb:
             "ftp_pass": Variable.get('FTP_PASS')
         },
         dag=facbdb_download)
+    get.set_upstream(email_started)
 
     preprocess = BashOperator(
         task_id='preprocess_' + source,
