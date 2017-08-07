@@ -27,6 +27,7 @@ facbdb_download = DAG(
 )
 
 email_started = EmailOperator(
+    task_id='email_on_trigger',
     to=['jpichot@planning.nyc.gov'],
     subject='[Airflow] FacDB Download Triggered',
     html_content='FacDB Download DAG triggered',
@@ -45,17 +46,16 @@ for source in data_sources.facdb:
         dag=facbdb_download)
     get.set_upstream(email_started)
 
-    preprocess = BashOperator(
-        task_id='preprocess_' + source,
-        bash_command="npm run preprocess {0} --prefix=~/scripts/data-loading-scripts".format(source),
-        dag=facbdb_download)
-    preprocess.set_upstream(get)
-
     push = BashOperator(
         task_id='push_' + source,
-        bash_command="npm run push {0} --prefix=~/scripts/data-loading-scripts".format(source),
+        bash_command="npm run push {{ params.source }} --prefix=~/scripts/data-loading-scripts -- --db={{ params.db }} --db_user={{ params.db_user }} --download_dir=./temp",
+        params={
+            "source": source,
+            "db": "af_facdb",
+            "db_user": "airflow",
+        },
         dag=facbdb_download)
-    push.set_upstream(preprocess)
+    push.set_upstream(get)
 
     after = BashOperator(
         task_id='after_' + source,
