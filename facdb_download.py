@@ -29,7 +29,7 @@ for source in data_sources.facdb:
     get = BashOperator(
         task_id='get_' + source,
         bash_command='npm run get {{ params.source }} --prefix=~/scripts/data-loading-scripts -- --ftp_user={{ params.ftp_user }} --ftp_pass={{ params.ftp_pass }} --download_dir=./temp',
-        params={g
+        params={
             "source": source,
             "ftp_user": Variable.get('FTP_USER'),
             "ftp_pass": Variable.get('FTP_PASS')
