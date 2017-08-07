@@ -10,7 +10,7 @@ import data_sources
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'schedule_interval': '0 0 1 * *',
+    'schedule_interval': '@monthly',
     'start_date': datetime(2017, 7, 1),
     'email': ['jpichot@planning.nyc.gov'],
     'email_on_failure': True,
@@ -21,7 +21,7 @@ default_args = {
 
 # Data Loading Scripts
 facbdb_download = DAG(
-    'facdb_download_v0_1',
+    'facdb_download_v0_2',
     default_args=default_args
 )
 
