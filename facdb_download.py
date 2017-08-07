@@ -10,8 +10,8 @@ import data_sources
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'schedule_interval': '@monthly',
-    'start_date': datetime(2017, 6, 1),
+    'schedule_interval': '0 0 1 * *',
+    'start_date': datetime(2017, 7, 1),
     'email': ['jpichot@planning.nyc.gov'],
     'email_on_failure': True,
     'email_on_retry': False,
@@ -21,7 +21,7 @@ default_args = {
 
 # Data Loading Scripts
 facbdb_download = DAG(
-    'facdb_download_v0',
+    'facdb_download_v0_1',
     default_args=default_args
 )
 
@@ -29,7 +29,7 @@ for source in data_sources.facdb:
     get = BashOperator(
         task_id='get_' + source,
         bash_command='npm run get {{ params.source }} --prefix=~/scripts/data-loading-scripts -- --ftp_user={{ params.ftp_user }} --ftp_pass={{ params.ftp_pass }} --download_dir=./temp',
-        params={
+        params={g
             "source": source,
             "ftp_user": Variable.get('FTP_USER'),
             "ftp_pass": Variable.get('FTP_PASS')
