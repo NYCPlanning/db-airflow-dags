@@ -32,7 +32,7 @@ for source in data_sources.facdb:
             "source": source,
             "ftp_user": Variable.get('FTP_USER'),
             "ftp_pass": Variable.get('FTP_PASS')
-        }
+        },
         dag=facbdb_download)
 
     preprocess = BashOperator(
