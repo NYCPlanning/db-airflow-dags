@@ -16,13 +16,13 @@ default_args = {
     'email': ['jpichot@planning.nyc.gov'],
     'email_on_failure': True,
     'email_on_retry': False,
-    'retries': 1,
+    'retries': 0,
     'retry_delay': timedelta(minutes=5),
 }
 
 # Data Loading Scripts
 facbdb_download = DAG(
-    'facdb_download_v0_2',
+    'facdb_download_v0_3',
     default_args=default_args
 )
 
