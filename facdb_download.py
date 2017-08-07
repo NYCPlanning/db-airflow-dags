@@ -10,7 +10,8 @@ import data_sources
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime.today(),
+    'schedule_interval': '@monthly',
+    'start_date': datetime(2017, 6, 1),
     'email': ['jpichot@planning.nyc.gov'],
     'email_on_failure': True,
     'email_on_retry': False,
