@@ -22,7 +22,7 @@ default_args = {
 
 # Data Loading Scripts
 facbdb_download = DAG(
-    'facdb_download_v0_3',
+    'facdb_download_v0_4',
     default_args=default_args
 )
 
@@ -35,30 +35,31 @@ email_started = EmailOperator(
 )
 
 for source in data_sources.facdb:
+    params = {
+        "source": source,
+        "ftp_user": Variable.get('FTP_USER'),
+        "ftp_pass": Variable.get('FTP_PASS'),
+        "db": "af_facdb",
+        "db_user": "airflow",
+    }
+
     get = BashOperator(
         task_id='get_' + source,
         bash_command='npm run get {{ params.source }} --prefix=~/scripts/data-loading-scripts -- --ftp_user={{ params.ftp_user }} --ftp_pass={{ params.ftp_pass }} --download_dir=./temp',
-        params={
-            "source": source,
-            "ftp_user": Variable.get('FTP_USER'),
-            "ftp_pass": Variable.get('FTP_PASS')
-        },
+        params=params,
         dag=facbdb_download)
     get.set_upstream(email_started)
 
     push = BashOperator(
         task_id='push_' + source,
         bash_command="npm run push {{ params.source }} --prefix=~/scripts/data-loading-scripts -- --db={{ params.db }} --db_user={{ params.db_user }} --download_dir=./temp",
-        params={
-            "source": source,
-            "db": "af_facdb",
-            "db_user": "airflow",
-        },
+        params=params,
         dag=facbdb_download)
     push.set_upstream(get)
 
     after = BashOperator(
         task_id='after_' + source,
-        bash_command="npm run after {0} --prefix=~/scripts/data-loading-scripts".format(source),
+        bash_command="npm run after {{ params.source }} --prefix=~/scripts/data-loading-scripts -- --db={{ params.db }} --db_user={{ params.db_user }}",
+        params=params,
         dag=facbdb_download)
     after.set_upstream(push)
