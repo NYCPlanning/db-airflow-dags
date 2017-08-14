@@ -63,7 +63,7 @@ for source in data_sources.facdb:
     after_file_path = "/home/airflow/airflow/dags/scripts/datasets/{0}/after.sql".format(source)
     if os.path.isfile(after_file_path):
         with open(after_file_path, 'r') as sql_file:
-            sql=sql_file.read().replace('\n', '')
+            sql=sql_file.read().replace('\n', ' ')
 
         after = PostgresOperator(
             task_id='after_' + source,
@@ -72,10 +72,3 @@ for source in data_sources.facdb:
             dag=facbdb_download
         )
         after.set_upstream(push)
-
-    # after = BashOperator(
-    #     task_id='after_' + source,
-    #     bash_command="npm run after {{ params.source }} --prefix=~/airflow/dags/scripts -- --db={{ params.db }} --db_user={{ params.db_user }}",
-    #     params=params,
-    #     dag=facbdb_download)
-    # after.set_upstream(push)
