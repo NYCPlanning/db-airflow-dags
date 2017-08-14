@@ -59,8 +59,8 @@ for source in data_sources.facdb:
         dag=facbdb_download)
     push.set_upstream(get)
 
-    after_file_path = "~/airflow/dags/scripts/datasets/{0}/after.sql".format(source)
-    os.path.isfile(after_file_path):
+    after_file_path = "/home/airflow/airflow/dags/scripts/datasets/{0}/after.sql".format(source)
+    if os.path.isfile(after_file_path):
         after = SQLOperator(
             task_id='after_' + source,
             postgres_conn_id='postgres_default',
