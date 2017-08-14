@@ -61,7 +61,7 @@ for source in data_sources.facdb:
 
     after_file_path = "/home/airflow/airflow/dags/scripts/datasets/{0}/after.sql".format(source)
     if os.path.isfile(after_file_path):
-        after = SQLOperator(
+        after = PostgresOperator(
             task_id='after_' + source,
             postgres_conn_id='postgres_default',
             sql=after_file_path
