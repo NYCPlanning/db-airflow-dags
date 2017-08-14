@@ -1,8 +1,10 @@
-from airflow.operators.bash_operator import BashOperator
-from airflow.operators.email_operator import EmailOperator
+import os
+
 from airflow.models import DAG
 from airflow.models import Variable
-from airflow.utils.file import TemporaryDirectory
+from airflow.operators.bash_operator import BashOperator
+from airflow.operators.email_operator import EmailOperator
+from airflow.operators.postgres_operator import PostgresOperator
 
 from datetime import datetime, timedelta
 
@@ -21,7 +23,7 @@ default_args = {
 
 # Data Loading Scripts
 facbdb_download = DAG(
-    'facdb_download_v0_5',
+    'facdb_download_v0_6',
     schedule_interval='@monthly',
     default_args=default_args
 )
@@ -45,21 +47,30 @@ for source in data_sources.facdb:
 
     get = BashOperator(
         task_id='get_' + source,
-        bash_command='npm run get {{ params.source }} --prefix=~/scripts/data-loading-scripts -- --ftp_user={{ params.ftp_user }} --ftp_pass={{ params.ftp_pass }} --download_dir=./temp',
+        bash_command='npm run get {{ params.source }} --prefix=~/airflow/dags/scripts -- --ftp_user={{ params.ftp_user }} --ftp_pass={{ params.ftp_pass }} --download_dir=~/tmp',
         params=params,
         dag=facbdb_download)
     get.set_upstream(email_started)
 
     push = BashOperator(
         task_id='push_' + source,
-        bash_command="npm run push {{ params.source }} --prefix=~/scripts/data-loading-scripts -- --db={{ params.db }} --db_user={{ params.db_user }} --download_dir=./temp",
+        bash_command="npm run push {{ params.source }} --prefix=~/airflow/dags/scripts -- --db={{ params.db }} --db_user={{ params.db_user }} --download_dir=~/tmp",
         params=params,
         dag=facbdb_download)
     push.set_upstream(get)
 
-    after = BashOperator(
-        task_id='after_' + source,
-        bash_command="npm run after {{ params.source }} --prefix=~/scripts/data-loading-scripts -- --db={{ params.db }} --db_user={{ params.db_user }}",
-        params=params,
-        dag=facbdb_download)
-    after.set_upstream(push)
+    after_file_path = "~/airflow/dags/scripts/datasets/{0}/after.sql".format(source)
+    os.path.isfile(after_file_path):
+        after = SQLOperator(
+            task_id='after_' + source,
+            postgres_conn_id='postgres_default',
+            sql=after_file_path
+        )
+        after.set_upstream(push)
+
+    # after = BashOperator(
+    #     task_id='after_' + source,
+    #     bash_command="npm run after {{ params.source }} --prefix=~/airflow/dags/scripts -- --db={{ params.db }} --db_user={{ params.db_user }}",
+    #     params=params,
+    #     dag=facbdb_download)
+    # after.set_upstream(push)

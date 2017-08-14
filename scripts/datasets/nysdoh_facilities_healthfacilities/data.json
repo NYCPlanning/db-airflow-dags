@@ -1,0 +1,15 @@
+{
+  "url": "https://health.data.ny.gov/api/views/vn5v-hh5r/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "nysdoh_facilities_healthfacilities.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"nysdoh_facilities_healthfacilities.csv",
+      "table": "nysdoh_facilities_healthfacilities"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

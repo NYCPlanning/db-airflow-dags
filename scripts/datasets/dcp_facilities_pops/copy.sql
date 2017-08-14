@@ -1,0 +1,1 @@
+\COPY dcp_facilities_pops FROM './temp/dcp_facilities_pops/dcp_facilities_pops.csv' CSV HEADER;

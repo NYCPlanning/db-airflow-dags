@@ -1,0 +1,1 @@
+\COPY omb_facilities_libraryvisits FROM './temp/omb_facilities_libraryvisits/omb_facilities_libraryvisits.csv' CSV HEADER;

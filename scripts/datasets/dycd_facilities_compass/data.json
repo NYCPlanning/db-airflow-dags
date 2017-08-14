@@ -1,0 +1,15 @@
+{
+  "url": "ftp://{{username}}:{{password}}@23.246.114.130/agencySourceData/dycd/DYCD-DCP%20Data%20Request_Dec162016_COMPASS.csv",
+  "saveFile": "dycd_facilities_compass.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"dycd_facilities_compass.csv",
+      "table": "dycd_facilities_compass"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

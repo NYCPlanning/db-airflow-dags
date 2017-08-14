@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/views/d4iy-9uh7/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "nycha_facilities_communitycenters.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"nycha_facilities_communitycenters.csv",
+      "table": "nycha_facilities_communitycenters"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

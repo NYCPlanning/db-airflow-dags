@@ -1,0 +1,1 @@
+\COPY dcas_facilities_nypd FROM './temp/dcas_facilities_nypd/dcas_facilities_nypd.csv' CSV HEADER;

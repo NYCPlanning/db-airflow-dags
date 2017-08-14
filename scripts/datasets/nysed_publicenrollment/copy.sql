@@ -1,0 +1,1 @@
+\COPY nysed_publicenrollment FROM './temp/nysed_publicenrollment/nysed_publicenrollment.csv' CSV HEADER encoding 'windows-1251';

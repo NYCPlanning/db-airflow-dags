@@ -1,0 +1,1 @@
+\COPY dycd_facilities_otherprograms FROM './temp/dycd_facilities_otherprograms/dycd_facilities_otherprograms.csv' CSV HEADER;

@@ -1,0 +1,15 @@
+{
+  "url": "ftp://{{username}}:{{password}}@23.246.114.130/agencySourceData/dhs/DHS-DCP%20Data%20Request%202017_03_21.csv",
+  "saveFile": "dhs_facilities_shelters.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"dhs_facilities_shelters.csv",
+      "table": "dhs_facilities_shelters"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

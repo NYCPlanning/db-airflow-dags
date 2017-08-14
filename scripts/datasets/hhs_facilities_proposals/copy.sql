@@ -1,0 +1,1 @@
+\COPY hhs_facilities_proposals FROM './temp/hhs_facilities_proposals/hhs_facilities_proposals.csv' CSV HEADER;

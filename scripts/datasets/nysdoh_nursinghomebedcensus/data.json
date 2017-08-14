@@ -1,0 +1,15 @@
+{
+  "url": "https://health.data.ny.gov/api/views/izta-vnpq/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "nysdoh_nursinghomebedcensus.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"nysdoh_nursinghomebedcensus.csv",
+      "table": "nysdoh_nursinghomebedcensus"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

@@ -1,0 +1,16 @@
+{
+  "url": "https://data.cityofnewyork.us/api/file_data/IjLvNcAZDM01muXoNu_-a2ggw13oNeeV4xH-rPS_Dig?filename=Public_School_Locations.zip  ",
+  
+  "load": "shp2pgsql",
+  "loadFiles": [
+    {
+      "file":"Public_Schools_Points_2011-2012A.shp",
+      "table": "doe_facilities_publicschools"
+    }
+  ],
+  "saveFile":"doe_facilities_publicschools.zip",
+  "shp2pgsql": [ 
+    "-d",
+    "-s 2263:4326"
+  ] 
+}

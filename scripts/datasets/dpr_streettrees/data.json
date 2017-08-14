@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/geospatial/pi5s-9p35?method=export&format=Original",
+  "saveFile": "dpr_streettrees.zip",
+  "load": "shp2pgsql",
+  "loadFiles": [
+    {
+      "file":"TreesCount2015Trees.shp",
+      "table": "dpr_streettrees"
+    }
+  ],
+  "shp2pgsql": [ 
+    "-d",
+    "-s 2263:4326"
+  ] 
+}

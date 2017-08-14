@@ -1,0 +1,15 @@
+{
+  "url": "ftp://{{username}}:{{password}}@23.246.114.130/agencySourceData/nysed/2015-16NonpublicEnrollmentbyGrade.csv",
+  "saveFile": "nysed_nonpublicenrollment.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"nysed_nonpublicenrollment.csv",
+      "table": "nysed_nonpublicenrollment"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

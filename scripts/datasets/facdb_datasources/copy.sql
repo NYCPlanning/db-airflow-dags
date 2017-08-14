@@ -1,0 +1,1 @@
+\COPY facdb_datasources FROM './temp/facdb_datasources/facdb_datasources.csv' CSV HEADER;

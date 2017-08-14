@@ -1,0 +1,1 @@
+\COPY foodbankny_facilities_foodbanks FROM './temp/foodbankny_facilities_foodbanks/foodbankny_facilities_foodbanks.csv' CSV HEADER;

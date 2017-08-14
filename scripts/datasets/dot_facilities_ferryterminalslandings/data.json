@@ -1,0 +1,15 @@
+{
+  "url": "ftp://{{username}}:{{password}}@23.246.114.130/agencySourceData/dot/dot_facilities_FerryTerminalsLandings.zip",
+  "load": "shp2pgsql",
+  "loadFiles": [
+    {
+      "file":"Ferry_Terminals_Landings/Ferry_Terminals_Landings.shp",
+      "table": "dot_facilities_ferryterminalslandings"
+    }
+  ],
+  "saveFile":"dot_facilities_FerryTerminalsLandings.zip",
+  "shp2pgsql": [ 
+    "-d",
+    "-s 4326:4326"
+  ] 
+}

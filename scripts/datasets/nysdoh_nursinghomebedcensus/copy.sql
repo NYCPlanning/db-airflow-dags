@@ -1,0 +1,1 @@
+\COPY nysdoh_nursinghomebedcensus FROM './temp/nysdoh_nursinghomebedcensus/nysdoh_nursinghomebedcensus.csv' CSV HEADER;

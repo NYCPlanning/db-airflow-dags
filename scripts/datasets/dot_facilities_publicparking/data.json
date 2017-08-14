@@ -1,0 +1,15 @@
+{
+  "url": "ftp://{{username}}:{{password}}@23.246.114.130/agencySourceData/dot/publicparkinglots.csv",
+  "saveFile": "dot_facilities_publicparking.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"dot_facilities_publicparking.csv",
+      "table": "dot_facilities_publicparking"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/views/u35m-9t32/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "dcla_facilities_culturalinstitutions.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"dcla_facilities_culturalinstitutions.csv",
+      "table": "dcla_facilities_culturalinstitutions"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

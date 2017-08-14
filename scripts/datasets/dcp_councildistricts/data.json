@@ -1,0 +1,14 @@
+{
+  "url": "http://www1.nyc.gov/assets/planning/download/zip/data-maps/open-data/nyccwi_16d.zip",
+  "load": "shp2pgsql",
+  "loadFiles":[
+    {
+      "file":"nyccwi_16d/nyccwi.shp",
+      "table": "dcp_councildistricts"
+    }
+  ], 
+  "shp2pgsql": [ 
+    "-d",
+    "-s 2263:4326"
+  ] 
+}

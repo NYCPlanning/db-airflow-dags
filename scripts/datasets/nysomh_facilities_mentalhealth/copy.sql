@@ -1,0 +1,1 @@
+\COPY nysomh_facilities_mentalhealth FROM './temp/nysomh_facilities_mentalhealth/nysomh_facilities_mentalhealth.csv' CSV HEADER;

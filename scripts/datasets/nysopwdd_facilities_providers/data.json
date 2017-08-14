@@ -1,0 +1,15 @@
+{
+  "url": "https://data.ny.gov/api/views/ieqx-cqyk/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "nysopwdd_facilities_providers.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"nysopwdd_facilities_providers.csv",
+      "table": "nysopwdd_facilities_providers"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

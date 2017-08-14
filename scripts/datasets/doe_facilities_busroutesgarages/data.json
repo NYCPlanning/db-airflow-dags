@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/views/8yac-vygm/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "doe_facilities_busroutesgarages.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"doe_facilities_busroutesgarages.csv",
+      "table": "doe_facilities_busroutesgarages"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

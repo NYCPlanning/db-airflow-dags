@@ -1,0 +1,16 @@
+{
+  "url": "http://gis.ny.gov/gisdata/data/ds_1114/DEC_lands.zip",
+ 
+  "load": "shp2pgsql",
+  "loadFiles": [
+    {
+      "file":"DEC_Lands.shp",
+      "table": "nysdec_facilities_lands"
+    }
+  ],
+  "saveFile":"nysdec_facilities_lands.zip",
+  "shp2pgsql": [ 
+    "-d",
+    "-s 26918:4326"
+  ] 
+}

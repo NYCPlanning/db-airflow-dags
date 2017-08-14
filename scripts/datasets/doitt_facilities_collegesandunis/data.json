@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/geospatial/4kym-4xw5?method=export&format=Shapefile",
+  "saveFile": "doitt_facilities_collegesandunis.zip",
+  "load": "shp2pgsql",
+  "loadFiles": [
+    {
+      "file":"geo_export_39f7575b-a769-4570-9228-cd56ad3628a0.shp",
+      "table": "doitt_facilities_collegesandunis"
+    }
+  ],
+  "shp2pgsql": [ 
+    "-d",
+    "-s 2263:4326"
+  ] 
+}

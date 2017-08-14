@@ -1,0 +1,13 @@
+{
+  "url": "https://data.cityofnewyork.us/api/geospatial/r8nu-ymqj?method=export&format=GeoJSON",
+  "load": "org2ogr",
+  "loadFiles": [
+    {
+      "file":"dcp_school_districts.json",
+      "table": "dcp_school_districts"
+    }
+  ],
+  "saveFile":"dcp_school_districts.json",
+  "ogr2ogr": [ 
+        ] 
+}

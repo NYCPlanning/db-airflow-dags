@@ -1,0 +1,17 @@
+
+{
+  "url": "https://data.cityofnewyork.us/api/geospatial/nqwf-w8eh?method=export&format=Original",
+
+  "load": "shp2pgsql",
+  "loadFiles":[
+    {
+      "file":"building.shp",
+      "table": "doitt_buildingfootprints"
+    }
+  ],
+  "saveFile" : "doitt_buildingfootprints.zip",
+  "shp2pgsql": [
+    "-d",
+    "-s 2263:4326"
+  ]
+}

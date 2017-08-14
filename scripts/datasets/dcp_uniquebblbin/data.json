@@ -1,0 +1,15 @@
+{
+  "url": "https://raw.githubusercontent.com/NYCPlanning/helper-datasets/master/uniquebblbin.csv",
+  "saveFile": "dcp_uniquebblbin.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"dcp_uniquebblbin.csv",
+      "table": "dcp_uniquebblbin"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

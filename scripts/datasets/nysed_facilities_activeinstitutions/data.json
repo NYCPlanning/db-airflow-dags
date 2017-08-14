@@ -1,0 +1,15 @@
+{
+  "url": "ftp://{{username}}:{{password}}@23.246.114.130/agencySourceData/nysed/NYSEdListing.csv",
+  "saveFile": "nysed_facilities_activeinstitutions.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"nysed_facilities_activeinstitutions.csv",
+      "table": "nysed_facilities_activeinstitutions"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

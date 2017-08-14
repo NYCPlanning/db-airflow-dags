@@ -1,0 +1,31 @@
+-- create table to load csv from the nyc open data portal
+DROP TABLE IF EXISTS nysopwdd_facilities_providers;
+CREATE TABLE nysopwdd_facilities_providers (
+	Developmental_Disability_Services_Office text,
+	Service_Provider_Agency text,
+	Street_Address_ text,
+	Street_Address_Line_2 text,
+	City text,
+	State text,
+	Zip_Code text,
+	Phone text,
+	County text,
+	Website_Url text,
+	Intermediate_Care_Facilities_ICFs text,
+	Individual_Residential_Alternative_IRA text,
+	Family_Care text,
+	Consolidated_Supports_And_Services text,
+	Individual_Support_Services_ISSs text,
+	Day_Training text,
+	Day_Treatment text,
+	Senior_Geriatric_Services text,
+	Day_Habilitation text,
+	Work_Shop text,
+	Prevocational text,
+	Supported_Employment_Enrollments text,
+	Community_Habilitation text,
+	Family_Support_Services text,
+	Care_at_Home_Waiver_Services text,
+	Developmental_Centers_And_Special_Population_Services text,
+	Location_1 text
+  )

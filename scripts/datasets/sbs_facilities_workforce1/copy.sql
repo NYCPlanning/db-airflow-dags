@@ -1,0 +1,1 @@
+\COPY sbs_facilities_workforce1 FROM './temp/sbs_facilities_workforce1/sbs_facilities_workforce1.csv' CSV HEADER;

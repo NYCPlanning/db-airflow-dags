@@ -1,0 +1,14 @@
+{
+  "url": "http://data.cityofnewyork.us/download/i8iw-xf4u/application%2Fzip",
+  "load": "shp2pgsql",
+  "loadFiles":[
+    {
+      "file":"ZIP_CODE_040114/ZIP_CODE_040114.shp",
+      "table": "doitt_zipcodeboundaries"
+    }
+  ], 
+  "shp2pgsql": [ 
+    "-d",
+    "-s 2263:4326"
+  ] 
+}

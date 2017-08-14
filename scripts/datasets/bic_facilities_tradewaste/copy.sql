@@ -1,0 +1,1 @@
+\COPY bic_facilities_tradewaste FROM './temp/bic_facilities_tradewaste/bic_facilities_tradewaste.csv' CSV HEADER;

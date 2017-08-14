@@ -1,0 +1,15 @@
+{
+  "url": "https://raw.githubusercontent.com/NYCPlanning/helper_datasets/master/dcp_projecttypes_agencies.csv",
+  "saveFile": "dcp_projecttypes_agencies.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"dcp_projecttypes_agencies.csv",
+      "table": "dcp_projecttypes_agencies"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

@@ -1,0 +1,30 @@
+-- create table to load csv from the nyc open data portal
+DROP TABLE IF EXISTS hhs_facilities_proposals;
+CREATE TABLE hhs_facilities_proposals (
+	Contract_Source_ID text,
+	Agency_Name text,
+	Provider_Name text,
+	EIN text,
+	Corporate_Structure text,
+	Program_Name text,
+	Procurement_Title text,
+	Competition_Pool_Title text,
+	Contract_Title text,
+	External_Contract_Number text,
+	Contract_Type text,
+	EPIN text,
+	Contract_Start_Date text,
+	Contract_End_Date text,
+	Contract_Amount text,
+	Proposal_Title text,
+	Proposal_ID text,
+	Site_Name text,
+	Address_1 text,
+	Address_2 text,
+	City text,
+	State text,
+	Zip_Code text,
+	Award_Amount text,
+	Service_Setting_Name text,
+	Proposal_Amount text
+)

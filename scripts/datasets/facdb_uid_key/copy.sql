@@ -1,0 +1,1 @@
+\COPY facdb_uid_key FROM './temp/facdb_uid_key/facdb_uid_key.csv' CSV HEADER;

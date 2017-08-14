@@ -1,0 +1,1 @@
+\COPY dcla_facilities_culturalinstitutions FROM './temp/dcla_facilities_culturalinstitutions/dcla_facilities_culturalinstitutions.csv' CSV HEADER;

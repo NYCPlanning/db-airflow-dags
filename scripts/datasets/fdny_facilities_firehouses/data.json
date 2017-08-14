@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/views/pg99-2ihy/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "fdny_facilities_firehouses.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"fdny_facilities_firehouses.csv",
+      "table": "fdny_facilities_firehouses"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

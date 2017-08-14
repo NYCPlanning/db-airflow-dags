@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/views/dsg6-ifza/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "dohmh_facilities_daycare.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"dohmh_facilities_daycare.csv",
+      "table": "dohmh_facilities_daycare"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

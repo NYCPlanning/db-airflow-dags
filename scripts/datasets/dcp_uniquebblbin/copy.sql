@@ -1,0 +1,1 @@
+\COPY dcp_uniquebblbin FROM './temp/dcp_uniquebblbin/dcp_uniquebblbin.csv' CSV HEADER;

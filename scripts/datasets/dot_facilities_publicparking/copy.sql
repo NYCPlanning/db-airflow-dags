@@ -1,0 +1,1 @@
+\COPY dot_facilities_publicparking FROM './temp/dot_facilities_publicparking/dot_facilities_publicparking.csv' CSV HEADER;

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/views/a34j-ihvy/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "dsny_facilities_specialdropoff.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"dsny_facilities_specialdropoff.csv",
+      "table": "dsny_facilities_specialdropoff"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

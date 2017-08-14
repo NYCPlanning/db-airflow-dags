@@ -1,0 +1,15 @@
+{
+  "url": "ftp://{{username}}:{{password}}@23.246.114.130/agencySourceData/nysed/nysed_publicenrollment.csv",
+  "saveFile": "nysed_publicenrollment.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"nysed_publicenrollment.csv",
+      "table": "nysed_publicenrollment"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

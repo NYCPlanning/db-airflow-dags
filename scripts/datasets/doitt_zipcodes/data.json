@@ -1,0 +1,14 @@
+{
+  "url": "https://data.cityofnewyork.us/api/file_data/YObIR0MbpUVA0EpQzZSq5x55FzKGM2ejSeahdvjqR20?filename=ZIP_CODE_040114.zip",
+  "load": "shp2pgsql",
+  "loadFiles":[
+    {
+      "file":"ZIP_CODE_040114.shp",
+      "table": "doitt_zipcodes"
+    }
+  ], 
+  "shp2pgsql": [ 
+    "-d",
+    "-s 2263:4326"
+  ] 
+}

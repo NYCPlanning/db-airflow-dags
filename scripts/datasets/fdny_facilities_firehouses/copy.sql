@@ -1,0 +1,1 @@
+\COPY fdny_facilities_firehouses FROM './temp/fdny_facilities_firehouses/fdny_facilities_firehouses.csv' CSV HEADER;

@@ -1,0 +1,1 @@
+\COPY doe_facilities_busroutesgarages FROM './temp/doe_facilities_busroutesgarages/doe_facilities_busroutesgarages.csv' CSV HEADER;

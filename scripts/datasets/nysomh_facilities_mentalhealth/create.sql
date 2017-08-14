@@ -1,0 +1,30 @@
+-- create table to load csv from the nyc open data portal
+DROP TABLE IF EXISTS nysomh_facilities_mentalhealth;
+CREATE TABLE nysomh_facilities_mentalhealth (
+	Row_Created_Date_Time text,
+	Sponsor_Name text,
+	Sponsor_Code text,
+	Agency_Name text,
+	Agency_Code text,
+	Facility_Name text,
+	Facility_Code text,
+	Program_Name text,
+	Program_Code text,
+	Populations_Served text,
+	Agency_Phone text,
+	Program_Phone text,
+	Program_Address_1 text,
+	Program_Address_2 text,
+	Program_City text,
+	Program_State text,
+	Program_Zip text,
+	Operating_Certificate_Required text,
+	Program_Tier text,
+	Operating_Certificate_Duration text,
+	Program_County text,
+	Program_Region text,
+	Program_Type_Description text,
+	Program_Category_Description text,
+	Program_Subcategory_Description text,
+	Location text
+  )

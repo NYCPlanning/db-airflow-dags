@@ -1,0 +1,1 @@
+\COPY acs_facilities_daycareheadstart FROM './temp/acs_facilities_daycareheadstart/acs_facilities_daycareheadstart.csv' CSV HEADER;

@@ -1,0 +1,1 @@
+\COPY nysopwdd_facilities_providers FROM './temp/nysopwdd_facilities_providers/nysopwdd_facilities_providers.csv' CSV HEADER;

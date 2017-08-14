@@ -1,0 +1,1 @@
+\COPY doe_facilities_lcgms FROM './temp/doe_facilities_lcgms/doe_facilities_lcgms.csv' CSV HEADER;

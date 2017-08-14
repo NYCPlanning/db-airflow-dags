@@ -1,0 +1,14 @@
+{
+ "url": "ftp://{{username}}:{{password}}@23.246.114.130/agencySourceData/ddc/ddc_CapitalProjects_InfrastractureProjects.zip",
+ "load": "shp2pgsql",
+ "loadFiles": [
+  {
+    "file": "ddc_CapitalProjects_InfrastractureProjects.shp",
+    "table": "ddc_capitalprojects_infrastructure"
+  } 
+ ], 
+ "shp2pgsql": [ 
+   "-d",
+   "-s 2263:4326"
+ ] 
+}

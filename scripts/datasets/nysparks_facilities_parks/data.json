@@ -1,0 +1,15 @@
+{
+  "url": "https://data.ny.gov/api/views/9uuk-x7vh/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "nysparks_facilities_parks.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"nysparks_facilities_parks.csv",
+      "table": "nysparks_facilities_parks"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ]  
+}

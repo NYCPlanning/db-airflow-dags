@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/views/f7b6-v6v3/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "hhc_facilities_hospitals.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"hhc_facilities_hospitals.csv",
+      "table": "hhc_facilities_hospitals"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

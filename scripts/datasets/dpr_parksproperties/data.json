@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/geospatial/rjaj-zgq7?method=export&format=Original",
+  "saveFile": "dpr_parksproperties.zip",
+  "load": "shp2pgsql",
+  "loadFiles": [
+    {
+      "file":"OpenDataProperties20160714.shp",
+      "table": "dpr_parksproperties"
+    }
+  ],
+  "shp2pgsql": [
+    "-d",
+    "-s 2263:4326"
+  ]
+}

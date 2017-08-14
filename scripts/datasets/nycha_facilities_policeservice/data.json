@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/geospatial/72wx-vdjr?method=export&format=Shapefile",
+  "saveFile": "nycha_facilities_policeservice.zip",
+  "load": "shp2pgsql",
+  "loadFiles": [
+    {
+      "file":"geo_export_d20c5b12-b563-4376-8b72-298dcf736f7e.shp",
+      "table": "nycha_facilities_policeservice"
+    }
+  ],
+  "shp2pgsql": [
+    "-d",
+    "-s 4326:4326"
+  ]
+}

@@ -1,0 +1,1 @@
+\COPY dcp_facilities_togeocode FROM './temp/dcp_facilities_togeocode/dcp_facilities_togeocode.csv' CSV HEADER;

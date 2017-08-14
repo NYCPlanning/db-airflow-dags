@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/views/w7w3-xahh/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "dca_facilities_operatingbusinesses.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"dca_facilities_operatingbusinesses.csv",
+      "table": "dca_facilities_operatingbusinesses"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

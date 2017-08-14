@@ -1,0 +1,1 @@
+\COPY nysed_facilities_activeinstitutions FROM './temp/nysed_facilities_activeinstitutions/nysed_facilities_activeinstitutions.csv' CSV HEADER;

@@ -1,0 +1,1 @@
+\COPY facdb_togeocode FROM './temp/facdb_togeocode/facdb_togeocode.csv' CSV HEADER;

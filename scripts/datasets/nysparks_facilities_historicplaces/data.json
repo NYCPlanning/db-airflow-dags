@@ -1,0 +1,15 @@
+{
+  "url": "https://data.ny.gov/api/views/y36f-mkpp/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "nysparks_facilities_historicplaces.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"nysparks_facilities_historicplaces.csv",
+      "table": "nysparks_facilities_historicplaces"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ]  
+}

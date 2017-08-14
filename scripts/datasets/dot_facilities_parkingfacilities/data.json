@@ -1,0 +1,15 @@
+{
+  "url": "ftp://{{username}}:{{password}}@23.246.114.130/agencySourceData/dot/dot_facilities_ParkingFacilities.zip",
+  "load": "shp2pgsql",
+  "loadFiles": [
+    {
+      "file":"Parking_Facilities/Parking_Facilities.shp",
+      "table": "dot_facilities_parkingfacilities"
+    }
+  ],
+  "saveFile":"dot_facilities_ParkingFacilities.zip",
+  "shp2pgsql": [ 
+    "-d",
+    "-s 4326:4326"
+  ] 
+}

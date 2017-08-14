@@ -1,0 +1,1 @@
+\COPY nysdec_facilities_solidwaste FROM './temp/nysdec_facilities_solidwaste/nysdec_facilities_solidwaste.csv' CSV HEADER;

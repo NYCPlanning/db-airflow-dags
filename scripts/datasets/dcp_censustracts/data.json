@@ -1,0 +1,14 @@
+{
+  "url": "http://www1.nyc.gov/assets/planning/download/zip/data-maps/open-data/nyct2010wi_16d.zip",
+  "load": "shp2pgsql",
+  "loadFiles":[
+    {
+      "file":"nyct2010wi_16d/nyct2010wi.shp",
+      "table": "dcp_censustracts"
+    }
+  ], 
+  "shp2pgsql": [ 
+    "-d",
+    "-s 2263:4326"
+  ] 
+}

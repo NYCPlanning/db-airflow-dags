@@ -1,0 +1,19 @@
+{
+  "name": "facddb_download",
+  "version": "1.0.0",
+  "scripts": {
+    "get": "node get",
+    "preprocess": "node preprocess",
+    "push": "node push",
+    "after": "node after"
+  },
+  "dependencies": {
+    "download-file": "^0.1.5",
+    "fs-extra": "^4.0.1",
+    "fs-path": "0.0.23",
+    "ftp-get": "^0.3.1",
+    "minimist": "^1.2.0",
+    "mustache": "^2.2.1",
+    "unzip": "^0.1.11"
+  }
+}

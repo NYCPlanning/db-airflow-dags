@@ -1,0 +1,16 @@
+{
+  "url": "http://www.nyc.gov/html/dot/downloads/misc/2015_citybench.zip",
+  
+  "load": "shp2pgsql",
+  "loadFiles": [
+    {
+      "file":"NYC_CityBench.shp",
+      "table": "dot_facilities_benches"
+    }
+  ],
+  "saveFile":"dot_facilities_benches.zip",
+  "shp2pgsql": [ 
+    "-d",
+    "-s 2263:4326"
+  ] 
+}

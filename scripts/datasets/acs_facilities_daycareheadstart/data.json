@@ -1,0 +1,15 @@
+{
+  "url": "ftp://{{username}}:{{password}}@23.246.114.130/agencySourceData/acs/acs_facilities_daycareheadstart.csv",
+  "saveFile": "acs_facilities_daycareheadstart.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"acs_facilities_daycareheadstart.csv",
+      "table": "acs_facilities_daycareheadstart"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

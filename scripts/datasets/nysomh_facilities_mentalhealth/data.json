@@ -1,0 +1,15 @@
+{
+  "url": "https://data.ny.gov/api/views/6nvr-tbv8/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "nysomh_facilities_mentalhealth.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"nysomh_facilities_mentalhealth.csv",
+      "table": "nysomh_facilities_mentalhealth"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

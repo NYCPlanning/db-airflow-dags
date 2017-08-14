@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/views/6j6t-3ixh/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "dfta_facilities_contracts.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"dfta_facilities_contracts.csv",
+      "table": "dfta_facilities_contracts"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

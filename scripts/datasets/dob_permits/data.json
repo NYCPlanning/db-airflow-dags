@@ -1,0 +1,15 @@
+{
+  "url": "https://nycopendata.socrata.com/api/views/ipu4-2q9a/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "dob_permits.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"dob_permits.csv",
+      "table": "dob_permits"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

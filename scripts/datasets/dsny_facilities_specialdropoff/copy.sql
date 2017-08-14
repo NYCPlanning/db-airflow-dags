@@ -1,0 +1,1 @@
+\COPY dsny_facilities_specialdropoff FROM './temp/dsny_facilities_specialdropoff/dsny_facilities_specialdropoff.csv' CSV HEADER;

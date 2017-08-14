@@ -1,0 +1,15 @@
+{
+  "url": "ftp://{{username}}:{{password}}@23.246.114.130/agencySourceData/cusp/df_Library.csv",
+  "saveFile": "omb_facilities_libraryvisits.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"omb_facilities_libraryvisits.csv",
+      "table": "omb_facilities_libraryvisits"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

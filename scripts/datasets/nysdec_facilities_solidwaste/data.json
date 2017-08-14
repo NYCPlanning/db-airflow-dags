@@ -1,0 +1,15 @@
+{
+  "url": "https://data.ny.gov/api/views/2fni-raj8/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "nysdec_facilities_solidwaste.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"nysdec_facilities_solidwaste.csv",
+      "table": "nysdec_facilities_solidwaste"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

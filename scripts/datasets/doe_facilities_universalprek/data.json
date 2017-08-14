@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/views/kiyv-ks3f/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "doe_facilities_universalprek.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"doe_facilities_universalprek.csv",
+      "table": "doe_facilities_universalprek"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

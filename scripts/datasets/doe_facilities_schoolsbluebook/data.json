@@ -1,0 +1,15 @@
+{
+  "url": "ftp://{{username}}:{{password}}@23.246.114.130/agencySourceData/doe/2015-2016%20Blue%20Book%20-%20for%20CEQR%20analyses.csv",
+  "saveFile": "doe_facilities_schoolsbluebook.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"doe_facilities_schoolsbluebook.csv",
+      "table": "doe_facilities_schoolsbluebook"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

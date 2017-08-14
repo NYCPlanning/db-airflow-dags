@@ -1,0 +1,1 @@
+\COPY hra_facilities_dhsshelters FROM './temp/hra_facilities_dhsshelters/hra_facilities_dhsshelters.csv' CSV HEADER;

@@ -1,0 +1,15 @@
+{
+  "url": "https://raw.githubusercontent.com/NYCPlanning/facilities-db/master/helpers/facdb_uid_key.csv",
+  "saveFile": "facdb_uid_key.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"facdb_uid_key.csv",
+      "table": "facdb_uid_key"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

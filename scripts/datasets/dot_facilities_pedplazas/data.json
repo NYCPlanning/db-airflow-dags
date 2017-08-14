@@ -1,0 +1,15 @@
+{
+  "url": "ftp://{{username}}:{{password}}@23.246.114.130/agencySourceData/dot/DOT_Plaza_Inventory_20170224.zip",
+  "load": "shp2pgsql",
+  "loadFiles": [
+    {
+      "file":"DOT_Plaza_Inventory_20170224.shp",
+      "table": "dot_facilities_pedplazas"
+    }
+  ],
+  "saveFile":"dot_facilities_pedplazas.zip",
+  "shp2pgsql": [ 
+    "-d",
+    "-s 2263:4326"
+  ] 
+}

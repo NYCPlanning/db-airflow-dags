@@ -1,0 +1,15 @@
+{
+  "url": "https://raw.githubusercontent.com/NYCPlanning/helper_datasets/master/agencylookup.csv",
+  "saveFile": "dcp_agencylookup.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"dcp_agencylookup.csv",
+      "table": "dcp_agencylookup"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

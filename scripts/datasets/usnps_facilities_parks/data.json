@@ -1,0 +1,15 @@
+{
+  "url": "https://irma.nps.gov/DataStore/DownloadFile/580617",
+  "saveFile": "usnps_facilities_parks.zip",
+  "load": "shp2pgsql",
+  "loadFiles": [
+    {
+      "file":"nps_boundary.shp",
+      "table": "usnps_facilities_parks"
+    }
+  ],
+  "shp2pgsql": [ 
+    "-d",
+    "-s 4326:4326"
+  ] 
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/geospatial/p4pf-fyc4?method=export&format=Shapefile",
+  "saveFile": "doitt_facilities_libraries.zip",
+  "load": "shp2pgsql",
+  "loadFiles": [
+    {
+      "file":"geo_export_dcf6f17f-c66a-4c16-8831-2c82c9407ee2.shp",
+      "table": "doitt_facilities_libraries"
+    }
+  ],
+  "shp2pgsql": [ 
+    "-d",
+    "-s 4326:4326"
+  ] 
+}

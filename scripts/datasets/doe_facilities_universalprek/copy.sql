@@ -1,0 +1,1 @@
+\COPY doe_facilities_universalprek FROM './temp/doe_facilities_universalprek/doe_facilities_universalprek.csv' CSV HEADER;

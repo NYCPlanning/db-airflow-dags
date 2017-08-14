@@ -1,0 +1,1 @@
+\COPY nysparks_facilities_historicplaces FROM './temp/nysparks_facilities_historicplaces/nysparks_facilities_historicplaces.csv' CSV HEADER;

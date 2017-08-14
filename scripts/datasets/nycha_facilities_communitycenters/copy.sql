@@ -1,0 +1,1 @@
+\COPY nycha_facilities_communitycenters FROM './temp/nycha_facilities_communitycenters/nycha_facilities_communitycenters.csv' CSV HEADER;

@@ -1,0 +1,1 @@
+\COPY dca_facilities_operatingbusinesses FROM './temp/dca_facilities_operatingbusinesses/dca_facilities_operatingbusinesses.csv' CSV HEADER;

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/views/6smc-7mk6/rows.csv?accessType=DOWNLOAD",
+  "saveFile": "sbs_facilities_workforce1.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"sbs_facilities_workforce1.csv",
+      "table": "sbs_facilities_workforce1"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}

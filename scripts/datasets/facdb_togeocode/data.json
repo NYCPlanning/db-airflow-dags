@@ -1,0 +1,16 @@
+{
+  "url": "ftp://{{username}}:{{password}}@23.246.114.130/agencySourceData/dcp/facilities_addressestogeocode.csv",
+
+  "saveFile": "facdb_togeocode.csv",
+  "load": "csv",
+  "loadFiles": [
+    {
+      "file":"facdb_togeocode.csv",
+      "table": "facdb_togeocode"
+    }
+  ],
+  "csv": [ 
+    "create",
+    "copy"
+  ] 
+}
