@@ -23,7 +23,7 @@ default_args = {
 
 # Data Loading Scripts
 facbdb_download = DAG(
-    'facdb_download_v0_6',
+    'facdb_download',
     schedule_interval='@monthly',
     default_args=default_args
 )
