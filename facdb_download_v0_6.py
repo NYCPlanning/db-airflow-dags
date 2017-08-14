@@ -67,7 +67,7 @@ for source in data_sources.facdb:
 
         after = PostgresOperator(
             task_id='after_' + source,
-            postgres_conn_id='postgres_default',
+            postgres_conn_id='facdb',
             sql=sql,
             dag=facbdb_download
         )
