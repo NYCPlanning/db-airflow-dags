@@ -22,7 +22,7 @@ if(config.load == 'shp2pgsql') {
   console.log('Pushing into database using ' + config.load + '...');
 
   for (file of config.loadFiles) {
-    var filePath = download_dir + '/' + dataset + '/' + file.file
+    var filePath = download_dir + dataset + '/' + file.file
 
     if (!fs.existsSync(filePath)) {
       console.log('Error: data file is missing - ', filePath)
@@ -51,7 +51,7 @@ if(config.load == 'org2ogr') {
   console.log('Pushing into database using ' + config.load + '...');
 
   for (file of config.loadFiles) {
-    var filePath = './temp/' + dataset + '/' + file.file
+    var filePath = download_dir + dataset + '/' + file.file
 
     var ogr2ogrOptions = {
       options: config.ogr2ogr.join(' '),
@@ -74,7 +74,7 @@ if(config.load == 'csv') {
   console.log('Pushing into database using ' + config.load + '...');
 
   for (file of config.loadFiles) {
-    var filePath = './temp/' + dataset + '/' + file.file
+    var filePath = download_dir + dataset + '/' + file.file
 
     config.csv.forEach(function(action) {
       console.log(action);
