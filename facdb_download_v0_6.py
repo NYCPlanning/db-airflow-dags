@@ -64,7 +64,8 @@ for source in data_sources.facdb:
         after = PostgresOperator(
             task_id='after_' + source,
             postgres_conn_id='postgres_default',
-            sql=after_file_path
+            sql=after_file_path,
+            dag=facbdb_download
         )
         after.set_upstream(push)
 
