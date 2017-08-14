@@ -41,30 +41,34 @@ for source in data_sources.facdb:
         "source": source,
         "ftp_user": Variable.get('FTP_USER'),
         "ftp_pass": Variable.get('FTP_PASS'),
+        "download_dir": Variable.get('DOWNLOAD_DIR'),
         "db": "af_facdb",
         "db_user": "airflow",
     }
 
     get = BashOperator(
         task_id='get_' + source,
-        bash_command='npm run get {{ params.source }} --prefix=~/airflow/dags/scripts -- --ftp_user={{ params.ftp_user }} --ftp_pass={{ params.ftp_pass }} --download_dir=~/tmp',
+        bash_command='npm run get {{ params.source }} --prefix=~/airflow/dags/scripts -- --ftp_user={{ params.ftp_user }} --ftp_pass={{ params.ftp_pass }} --download_dir={{ params.download_dir }}',
         params=params,
         dag=facbdb_download)
     get.set_upstream(email_started)
 
     push = BashOperator(
         task_id='push_' + source,
-        bash_command="npm run push {{ params.source }} --prefix=~/airflow/dags/scripts -- --db={{ params.db }} --db_user={{ params.db_user }} --download_dir=~/tmp",
+        bash_command="npm run push {{ params.source }} --prefix=~/airflow/dags/scripts -- --db={{ params.db }} --db_user={{ params.db_user }} --download_dir={{ params.download_dir }}",
         params=params,
         dag=facbdb_download)
     push.set_upstream(get)
 
     after_file_path = "/home/airflow/airflow/dags/scripts/datasets/{0}/after.sql".format(source)
     if os.path.isfile(after_file_path):
+        with open(after_file_path, 'r') as sql_file:
+            sql=sql_file.read().replace('\n', '')
+
         after = PostgresOperator(
             task_id='after_' + source,
             postgres_conn_id='postgres_default',
-            sql=after_file_path,
+            sql=sql,
             dag=facbdb_download
         )
         after.set_upstream(push)
