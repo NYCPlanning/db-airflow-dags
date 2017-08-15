@@ -18,7 +18,7 @@ default_args = {
 
 facdb_assembly = DAG(
     'facdb_assembly',
-    schedule_interval='@monthly',
+    schedule_interval=None,
     default_args=default_args
 )
 
