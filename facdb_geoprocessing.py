@@ -2,6 +2,8 @@ from airflow.models import DAG
 from airflow.operators.postgres_operator import PostgresOperator
 from airflow.operators.bash_operator import BashOperator
 
+from datetime import datetime, timedelta
+
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
@@ -69,3 +71,6 @@ geoclient_zipcode = BashOperator(
     bash_command='node ./3_geoprocessing/geoclient_zipcode.js',
     dag=facdb_geoprocessing
 ) << geoclient_boro
+
+## Standardizing borough and assigning borough code again because
+## Geoclient sometimes fills in Staten Is instead of Staten Island
