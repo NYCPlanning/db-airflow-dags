@@ -22,17 +22,11 @@ facdb_assembly = DAG(
     default_args=default_args
 )
 
-assembly_scripts_dir = "/home/airflow/airflow/dags/assembly/"
-
-def sql_for_task(task_file):
-    with open(assembly_scripts_dir + task_file, 'r') as sql_file:
-        sql=sql_file.read().replace('\n', ' ')
-
 ## create empty master table with facilities db schema
 create_facdb = PostgresOperator(
     task_id='create_facdb',
     postgres_conn_id='facdb',
-    sql=sql_for_task('create.sql'),
+    sql='/assembly/create.sql',
     dag=facdb_assembly
 )
 
@@ -45,11 +39,11 @@ join_sourcedatainfo = PostgresOperator(
 )
 
 ## configure (transform) each dataset and insert into master table
-for task_file in os.listdir(assembly_scripts_dir + "config"):
+for task_file in os.listdir("/home/airflow/airflow/dags/assembly/config"):
     config = PostgresOperator(
         task_id=task_file[:-4],
         postgres_conn_id='facdb',
-        sql=sql_for_task("config/" + task_file),
+        sql="/assembly/config/" + task_file,
         dag=facdb_assembly
     )
     config << create_facdb
@@ -60,42 +54,42 @@ for task_file in os.listdir(assembly_scripts_dir + "config"):
 standardize_fixallcaps = PostgresOperator(
     task_id='standardize_fixallcaps',
     postgres_conn_id='facdb',
-    sql=sql_for_task('standardize/standardize_fixallcaps.sql'),
+    sql='/assembly/standardize/standardize_fixallcaps.sql',
     dag=facdb_assembly
 )
 
 standardize_capacity = PostgresOperator(
     task_id='standardize_capacity',
     postgres_conn_id='facdb',
-    sql=sql_for_task('standardize/standardize_capacity.sql'),
+    sql='/assembly/standardize/standardize_capacity.sql',
     dag=facdb_assembly
 )
 
 standardize_oversightlevel = PostgresOperator(
     task_id='standardize_oversightlevel',
     postgres_conn_id='facdb',
-    sql=sql_for_task('standardize/standardize_oversightlevel.sql'),
+    sql='/assembly/standardize/standardize_oversightlevel.sql',
     dag=facdb_assembly
 )
 
 standardize_agencytag = PostgresOperator(
     task_id='standardize_agencytag',
     postgres_conn_id='facdb',
-    sql=sql_for_task('standardize/standardize_agencytag.sql'),
+    sql='/assembly/standardize/standardize_agencytag.sql',
     dag=facdb_assembly
 )
 
 standardize_trim = PostgresOperator(
     task_id='standardize_trim',
     postgres_conn_id='facdb',
-    sql=sql_for_task('standardize/standardize_trim.sql'),
+    sql='/assembly/standardize/standardize_trim.sql',
     dag=facdb_assembly
 )
 
 standardize_factypes = PostgresOperator(
     task_id='standardize_factypes',
     postgres_conn_id='facdb',
-    sql=sql_for_task('standardize/standardize_factypes.sql'),
+    sql='/assembly/standardize/standardize_factypes.sql',
     dag=facdb_assembly
 )
 
@@ -103,7 +97,7 @@ standardize_factypes = PostgresOperator(
 standardize_borough = PostgresOperator(
     task_id='standardize_borough',
     postgres_conn_id='facdb',
-    sql=sql_for_task('standardize/standardize_borough.sql'),
+    sql='/assembly/standardize/standardize_borough.sql',
     dag=facdb_assembly
 )
 
@@ -111,7 +105,14 @@ standardize_borough = PostgresOperator(
 standardize_address = PostgresOperator(
     task_id='standardize_address',
     postgres_conn_id='facdb',
-    sql=sql_for_task('standardize/standardize_address.sql'),
+    sql='/assembly/standardize/standardize_address.sql',
+    dag=facdb_assembly
+)
+
+create_uuid = PostgresOperator(
+    task_id='create_uuid',
+    postgres_conn_id='facdb',
+    sql='/assembly/create_uuid.sql',
     dag=facdb_assembly
 )
 
@@ -123,3 +124,4 @@ standardize_agencytag >> standardize_trim
 standardize_trim >> standardize_factypes
 standardize_factypes >> standardize_borough
 standardize_borough >> standardize_address
+standardize_address >> create_uuid

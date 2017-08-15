@@ -60,15 +60,11 @@ for source in data_sources.facdb:
         dag=facbdb_download)
     push.set_upstream(get)
 
-    after_file_path = "/home/airflow/airflow/dags/download/datasets/{0}/after.sql".format(source)
-    if os.path.isfile(after_file_path):
-        with open(after_file_path, 'r') as sql_file:
-            sql=sql_file.read().replace('\n', ' ')
-
+    if os.path.isfile("/home/airflow/airflow/dags/download/datasets/{0}/after.sql".format(source)):
         after = PostgresOperator(
             task_id='after_' + source,
             postgres_conn_id='facdb',
-            sql=sql,
+            sql="/download/datasets/{0}/after.sql".format(source),
             dag=facbdb_download
         )
         after.set_upstream(push)
