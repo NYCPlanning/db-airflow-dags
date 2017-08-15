@@ -12,13 +12,13 @@ default_args = {
     'email': ['jpichot@planning.nyc.gov'],
     'email_on_failure': True,
     'email_on_retry': False,
-    'retries': 1,
+    'retries': 0,
     'retry_delay': timedelta(minutes=5),
 }
 
 facdb_assembly = DAG(
     'facdb_assembly',
-    schedule_interval='None',
+    schedule_interval='@monthly',
     default_args=default_args
 )
 
