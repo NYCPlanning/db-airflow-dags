@@ -9,8 +9,8 @@ default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
     'start_date': datetime(2017, 7, 1),
-    'email': ['jpichot@planning.nyc.gov'],
-    'email_on_failure': True,
+    # 'email': ['jpichot@planning.nyc.gov'],
+    'email_on_failure': False,
     'email_on_retry': False,
     'retries': 0,
     'retry_delay': timedelta(minutes=5),
@@ -110,9 +110,9 @@ standardize_address = PostgresOperator(
 )
 
 create_uuid = PostgresOperator(
-    task_id='create_uuid',
+    task_id='create_uid',
     postgres_conn_id='facdb',
-    sql='/assembly/create_uuid.sql',
+    sql='/assembly/create_uid.sql',
     dag=facdb_assembly
 )
 
