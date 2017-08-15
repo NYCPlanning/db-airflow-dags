@@ -34,7 +34,7 @@ create_facdb = PostgresOperator(
 join_sourcedatainfo = PostgresOperator(
     task_id='join_sourcedatainfo',
     postgres_conn_id='facdb',
-    sql=sql_for_task('join_sourcedatainfo.sql'),
+    sql='/assembly/join_sourcedatainfo.sql',
     dag=facdb_assembly
 )
 
