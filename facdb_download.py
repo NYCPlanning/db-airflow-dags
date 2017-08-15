@@ -48,19 +48,19 @@ for source in data_sources.facdb:
 
     get = BashOperator(
         task_id='get_' + source,
-        bash_command='npm run get {{ params.source }} --prefix=~/airflow/dags/scripts -- --ftp_user={{ params.ftp_user }} --ftp_pass={{ params.ftp_pass }} --download_dir={{ params.download_dir }}',
+        bash_command='npm run get {{ params.source }} --prefix=~/airflow/dags/download -- --ftp_user={{ params.ftp_user }} --ftp_pass={{ params.ftp_pass }} --download_dir={{ params.download_dir }}',
         params=params,
         dag=facbdb_download)
     get.set_upstream(email_started)
 
     push = BashOperator(
         task_id='push_' + source,
-        bash_command="npm run push {{ params.source }} --prefix=~/airflow/dags/scripts -- --db={{ params.db }} --db_user={{ params.db_user }} --download_dir={{ params.download_dir }}",
+        bash_command="npm run push {{ params.source }} --prefix=~/airflow/dags/download -- --db={{ params.db }} --db_user={{ params.db_user }} --download_dir={{ params.download_dir }}",
         params=params,
         dag=facbdb_download)
     push.set_upstream(get)
 
-    after_file_path = "/home/airflow/airflow/dags/scripts/datasets/{0}/after.sql".format(source)
+    after_file_path = "/home/airflow/airflow/dags/download/datasets/{0}/after.sql".format(source)
     if os.path.isfile(after_file_path):
         with open(after_file_path, 'r') as sql_file:
             sql=sql_file.read().replace('\n', ' ')
