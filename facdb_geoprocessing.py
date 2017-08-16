@@ -55,17 +55,17 @@ join_proptype = pg_task('join_proptype')
 proptype_plazas = pg_task('proptype_plazas')
 copy_backup3 = pg_task('copy_backup3')
 
-def vacuum_task(vacuum_number=""):
-    return PostgresOperator(
-        task_id="vaccum_" + vacuum_number,
-        postgres_conn_id='facdb',
-        sql="/geoprocessing/vacuum.sql",
-        dag=facdb_geoprocessing
-    )
-
-vacuum0 = vacuum_task("0")
-vacuum1 = vacuum_task("1")
-vacuum2 = vacuum_task("2")
+# def vacuum_task(vacuum_number=""):
+#     return PostgresOperator(
+#         task_id="vaccum_" + vacuum_number,
+#         postgres_conn_id='facdb',
+#         sql="/geoprocessing/vacuum.sql",
+#         dag=facdb_geoprocessing
+#     )
+#
+# vacuum0 = vacuum_task("0")
+# vacuum1 = vacuum_task("1")
+# vacuum2 = vacuum_task("2")
 
 # Using sql from assembly process
 standardize_address = PostgresOperator(
@@ -108,7 +108,7 @@ geoclient_zipcode = BashOperator(
     >> force2D
 
     # Setting SRID, indexing, and vacuuming facilities and dcp_mappluto...
-    >> setSRID_4326 >> vacuum0
+    >> setSRID_4326
 
     # Spatial join with boroughs...
     >> join_boro_pregeoclient
@@ -138,7 +138,7 @@ geoclient_zipcode = BashOperator(
     >> join_PLUTOspatial
 
     # Done spatially joining with dcp_mappluto
-    >> vacuum1 >> standardize_address
+    >> standardize_address
     # ^ need to clean up addresses again after filling in with PLUTO address
 
     ## FILLING IN REMAINING MISSING BINS
@@ -170,7 +170,7 @@ geoclient_zipcode = BashOperator(
     ## ^ In FacDB V1.5, will add conditional logic for type of facility
 
     # Setting propertytype for street plazas...
-    >> proptype_plazas >> vacuum2
+    >> proptype_plazas
 
     # Create backup table before merging and dropping duplicates
     >> copy_backup3
