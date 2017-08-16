@@ -2,7 +2,7 @@ UPDATE facilities AS f
     SET
         boro = p.boroname,
         borocode = p.borocode
-    FROM 
+    FROM
         dcp_boroboundaries_wi AS p
     WHERE
         f.geom IS NOT NULL

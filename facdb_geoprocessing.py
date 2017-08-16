@@ -31,18 +31,6 @@ def pg_task(task_id):
         dag=facdb_geoprocessing
     )
 
-def vacuum_task(vacuum_number=""):
-    return PostgresOperator(
-        task_id="vaccum_" + vacuum_number,
-        postgres_conn_id='facdb',
-        sql="/geoprocessing/vacuum.sql",
-        dag=facdb_geoprocessing
-    )
-
-vacuum0 = vacuum_task("0")
-vacuum1 = vacuum_task("1")
-vacuum2 = vacuum_task("2")
-
 force2D = pg_task('force2D')
 setSRID_4326 = pg_task('setSRID_4326')
 join_boro_pregeoclient = pg_task('join_boro_pregeoclient')
@@ -67,6 +55,19 @@ join_proptype = pg_task('join_proptype')
 proptype_plazas = pg_task('proptype_plazas')
 copy_backup3 = pg_task('copy_backup3')
 
+def vacuum_task(vacuum_number=""):
+    return PostgresOperator(
+        task_id="vaccum_" + vacuum_number,
+        postgres_conn_id='facdb',
+        sql="/geoprocessing/vacuum.sql",
+        dag=facdb_geoprocessing
+    )
+
+vacuum0 = vacuum_task("0")
+vacuum1 = vacuum_task("1")
+vacuum2 = vacuum_task("2")
+
+# Using sql from assembly process
 standardize_address = PostgresOperator(
     task_id='standardize_address',
     postgres_conn_id='facdb',

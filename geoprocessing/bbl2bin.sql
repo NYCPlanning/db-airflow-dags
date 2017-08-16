@@ -1,7 +1,7 @@
 UPDATE facilities AS f
     SET
         BIN = ARRAY[p.bin::text],
-        processingflag = 
+        processingflag =
         	(CASE
 	        	WHEN processingflag IS NULL THEN 'bbl2bin'
 	        	ELSE CONCAT(processingflag, '_bbl2bin')
