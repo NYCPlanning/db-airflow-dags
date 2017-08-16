@@ -30,9 +30,17 @@ def pg_task(task_id):
         dag=facdb_geoprocessing
     )
 
-vacuum0 = pg_task('vacuum')
-vacuum1 = pg_task('vacuum')
-vacuum2 = pg_task('vacuum')
+def vacuum_task(vacuum_number=""):
+    return PostgresOperator(
+        task_id="vaccum_" + vacuum_number,
+        postgres_conn_id='facdb',
+        sql="/geoprocessing/vacuum.sql",
+        dag=facdb_geoprocessing
+    )
+
+vacuum0 = vacuum_task("0")
+vacuum1 = vacuum_task("1")
+vacuum2 = vacuum_task("2")
 
 force2D = pg_task('force2D')
 setSRID_4326 = pg_task('setSRID_4326')
