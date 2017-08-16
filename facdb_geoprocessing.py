@@ -76,8 +76,8 @@ standardize_address = PostgresOperator(
 
 ## JS TASKS
 connection_params = {
-    "geosupport_id": Variable.get('GEOSUPPORT_ID'),
-    "geosupport_key": Variable.get('GEOSUPPORT_KEY'),
+    "geoclient_id": Variable.get('GEOCLIENT_ID'),
+    "geoclient_key": Variable.get('GEOCLIENT_KEY'),
     "db": "af_facdb",
     "db_user": "airflow",
 }
