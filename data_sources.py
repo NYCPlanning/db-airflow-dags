@@ -11,6 +11,7 @@ facdb = [
     "dcp_councildistricts",
     "dcp_ntaboundaries",
     "doitt_zipcodes",
+    "doitt_buildingfootprints",
 
     # Outside Datasets
     "bic_facilities_tradewaste",
@@ -37,7 +38,7 @@ facdb = [
     "usdot_facilities_ports",
     "usnps_facilities_parks",
 
-    # ---
+    ## Other_datasets - PULLING FROM FTP SITE
     "acs_facilities_daycareheadstart",
     "dcas_facilities_colp",
     "dhs_facilities_shelters",
