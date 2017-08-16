@@ -85,14 +85,14 @@ connection_params = {
 
 geoclient_boro = BashOperator(
     task_id='geoclient_boro',
-    bash_command='npm geoclient_boro --prefix=~/airflow/dags/geoprocessing/geoclient -- --db={{ params.db }} --db_user={{ params.db_user }} --geosupport_id={{ params.geosupport_id }} --geosupport_key={{ params.geosupport_key }}',
+    bash_command='npm run geoclient_boro --prefix=~/airflow/dags/geoprocessing/geoclient -- --db={{ params.db }} --db_user={{ params.db_user }} --geoclient_id={{ params.geoclient_id }} --geoclient_key={{ params.geoclient_key }}',
     params=connection_params,
     dag=facdb_geoprocessing
 )
 
 geoclient_zipcode = BashOperator(
     task_id='geoclient_zipcode',
-    bash_command='npm geoclient_zipcode --prefix=~/airflow/dags/geoprocessing/geoclient -- --db={{ params.db }} --db_user={{ params.db_user }} --geosupport_id={{ params.geosupport_id }} --geosupport_key={{ params.geosupport_key }}',
+    bash_command='npm run geoclient_zipcode --prefix=~/airflow/dags/geoprocessing/geoclient -- --db={{ params.db }} --db_user={{ params.db_user }} --geoclient_id={{ params.geoclient_id }} --geoclient_key={{ params.geoclient_key }}',
     params=connection_params,
     dag=facdb_geoprocessing
 )
