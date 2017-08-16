@@ -1,0 +1,14 @@
+{
+  "name": "facddb_geoprocessing",
+  "version": "1.0.0",
+  "scripts": {
+    "geoclient_boro": "node geoclient_boro.js",
+    "geoclient_zipcode": "node geoclient_zipcode.js"
+  },
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "mustache": "^2.3.0",
+    "pg-promise": "^6.4.0",
+    "request": "^2.81.0"
+  }
+}

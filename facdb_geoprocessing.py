@@ -66,22 +66,32 @@ join_proptype = pg_task('join_proptype')
 proptype_plazas = pg_task('proptype_plazas')
 copy_backup3 = pg_task('copy_backup3')
 
+standardize_address = PostgresOperator(
+    task_id='standardize_address',
+    postgres_conn_id='facdb',
+    sql='/assembly/standardize/standardize_address.sql',
+    dag=facdb_geoprocessing
+)
+
+## JS TASKS
+connection_params = {
+    "geosupport_id": Variable.get('GEOSUPPORT_ID'),
+    "geosupport_key": Variable.get('GEOSUPPORT_KEY'),
+    "db": "af_facdb",
+    "db_user": "airflow",
+}
+
 geoclient_boro = BashOperator(
     task_id='geoclient_boro',
-    bash_command='node ./3_geoprocessing/geoclient_boro.js',
+    bash_command='npm geoclient_boro --prefix=~/airflow/dags/geoprocessing/geoclient -- --db={{ params.db }} --db_user={{ params.db_user }} --geosupport_id={{ params.geosupport_id }} --geosupport_key={{ params.geosupport_key }}',
+    params=connection_params,
     dag=facdb_geoprocessing
 )
 
 geoclient_zipcode = BashOperator(
     task_id='geoclient_zipcode',
-    bash_command='node ./3_geoprocessing/geoclient_zipcode.js',
-    dag=facdb_geoprocessing
-)
-
-standardize_address = PostgresOperator(
-    task_id='standardize_address',
-    postgres_conn_id='facdb',
-    sql='/assembly/standardize/standardize_address.sql',
+    bash_command='npm geoclient_zipcode --prefix=~/airflow/dags/geoprocessing/geoclient -- --db={{ params.db }} --db_user={{ params.db_user }} --geosupport_id={{ params.geosupport_id }} --geosupport_key={{ params.geosupport_key }}',
+    params=connection_params,
     dag=facdb_geoprocessing
 )
 

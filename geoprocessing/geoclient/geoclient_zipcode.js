@@ -2,9 +2,8 @@
 // PROCESS OVERVIEW
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Select all records with null geoms and a boro value
-// Geocode using boro and address -- prints errors and and skips to keep going
-// Reject records do not get updated in the database.
+// Select all records with null geoms and zipcode value
+// Geocode using zipcode and address -- prints errors and and skips to keep going
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // STEP 1 --- LOADING DEPENDENCIES
@@ -12,17 +11,16 @@
 
 
 // REQUIRE CODE LIBRARY DEPENDENCIES
-var pgp = require('pg-promise')(), 
+var pgp = require('pg-promise')(),
   request = require('request'),
   Mustache = require('mustache');
 
-// REQUIRE JS FILE WITH API CREDENTIALS -- USED IN addressLookup FUNCTION
-// ALSO REQUIRES JS SILE WITH DATABASE CONFIGURATION
-var config = require('../dbconfig.js');
-var apiCredentials = require('../apiCredentials.js');
+var argv = require('minimist')(process.argv.slice(2));
 
-// USE DATABASE CONFIGURATION JS FILE TO LINK TO DATABASE
-var db = pgp(config);
+var db = pgp({
+  database: argv.db,
+  user: argv.db_user,
+});
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,14 +30,15 @@ var db = pgp(config);
 
 // querying for records without geoms
 var nullGeomQuery = `SELECT DISTINCT
-                      boro,
+                      zipcode,
                       addressnum,
                       streetname
-                    FROM facilities
+                    FROM
+                      facilities
                     WHERE
                       addressnum IS NOT NULL
                       AND streetname IS NOT NULL
-                      AND boro IS NOT NULL
+                      AND zipcode IS NOT NULL
                       AND processingflag IS NULL`;
 
 
@@ -52,7 +51,7 @@ var i=0;
 var nullGeomResults;
 
 db.any(nullGeomQuery)
-  .then(function (data) { 
+  .then(function (data) {
     nullGeomResults = data
 
     console.log('Found ' + nullGeomResults.length + ' null geometries in facilities ')
@@ -64,28 +63,28 @@ db.any(nullGeomQuery)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-// STEP 4 --- SETTING TEMPLATES FOR REQUEST TO API -- REQUIRES ADDRESS#, STREET NAME, AND BORO OR ZIP
+// STEP 4 --- SETTING TEMPLATES FOR REQUEST TO API -- REQUIRES ADDRESS#, STREET NAME, AND BOROUGH OR ZIP
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// records without geoms and with boro
-var geoclientTemplate1 = 'https://api.cityofnewyork.us/geoclient/v1/address.json?houseNumber={{housenumber}}&street={{streetname}}&borough={{boro}}&app_id={{app_id}}&app_key={{app_key}}';
+// records without geoms and with zipcode, not boro
+var geoclientTemplate1 = 'https://api.cityofnewyork.us/geoclient/v1/address.json?houseNumber={{housenumber}}&street={{{streetname}}}&zip={{zipcode}}&app_id={{app_id}}&app_key={{app_key}}';
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-// STEP 5 --- DEFINES AND RUNS FUNCTION WHICH LOOKS UP ADDRESSES USING geoclientTemplate
+// STEP 5 --- DEFINES/RUNS FUNCTION WHICH LOOKS UP ADDRESSES USING geoclientTemplate
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 function addressLookup1(row) {
-  // console.log('Looking up address', row.boro.trim(), row.addressnum.trim(), row.streetname.split(',')[0].split('#')[0].split(' - ')[0].trim())
+  // console.log('Looking up address', row.zipcode, row.addressnum.trim(), row.streetname.split(',')[0].split('#')[0].split(' - ')[0].trim())
 
       var apiCall1 = Mustache.render(geoclientTemplate1, {
-        
+
         // MAKE SURE THESE MATCH THE FIELD NAMES
         housenumber: row.addressnum.replace("/", "").replace("\"", "").replace("!", "").trim(),
-        streetname: row.streetname.split(',')[0].split('#')[0].split(' - ')[0].split('(')[0].split(';')[0].split('Suite')[0].split('Ste')[0].split('Apt')[0].split('apt')[0].split('Room')[0].split('Rm')[0].split('Box')[0].split('Unit')[0].trim(),
-        boro: row.boro.trim(),
+        streetname: row.streetname.split(',')[0].split('#')[0].split(' - ')[0].trim(),
+        zipcode: row.zipcode,
         app_id: apiCredentials.app_id,
         app_key: apiCredentials.app_key
       })
@@ -95,7 +94,7 @@ function addressLookup1(row) {
       request(apiCall1, function(err, response, body) {
           console.log(err)
           // A. try PARSING json
-          try { 
+          try {
             var data = JSON.parse(body)
             // B. try getting ADDRESS from data response
             try {
@@ -132,13 +131,14 @@ function addressLookup1(row) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-// STEP 6 --- DEFINES/RUNS FUNCTION updateFacilities 
+// STEP 6 --- DEFINES/RUNS FUNCTION updateFacilities
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 function updateFacilities(data, row) {
 
-  var insertTemplate = `UPDATE facilities 
+  var insertTemplate = `UPDATE
+                          facilities
                         SET
                           geom=(CASE
                             WHEN geom IS NULL THEN ST_SetSRID(ST_GeomFromText(\'POINT({{longitude}} {{latitude}})\'),4326)
@@ -154,26 +154,33 @@ function updateFacilities(data, row) {
                           END),
                           addressnum=\'{{newaddressnum}}\',
                           streetname=initcap(\'{{newstreetname}}\'),
-                          address=initcap(CONCAT(\'{{newaddressnum}}\',\' \',\'{{newstreetname}}\')),
+                          address=CONCAT(\'{{newaddressnum}}\',\' \',initcap(\'{{newstreetname}}\')),
                           bbl=ARRAY[\'{{bbl}}\'],
                           bin=ARRAY[\'{{bin}}\'],
-                          zipcode=\'{{zipcode}}\',
+                          boro=initcap(\'{{boro}}\'),
+                          borocode=(CASE
+                            WHEN \'{{boro}}\'=\'MANHATTAN\' THEN 1
+                            WHEN \'{{boro}}\'=\'BRONX\' THEN 2
+                            WHEN \'{{boro}}\'=\'BROOKLYN\' THEN 3
+                            WHEN \'{{boro}}\'=\'QUEENS\' THEN 4
+                            WHEN \'{{boro}}\'=\'STATEN ISLAND\' THEN 5
+                          END),
                           city=initcap(\'{{city}}\'),
                           processingflag=(CASE
-                            WHEN geom IS NULL THEN \'geoclientboro2geom\'
-                            ELSE \'geoclientboro\'
+                            WHEN geom IS NULL THEN \'geoclientzip2geom\'
+                            ELSE \'geoclientzip\'
                           END)
                         WHERE
                           addressnum=\'{{oldaddressnum}}\'
                           AND streetname=\'{{oldstreetname}}\'
-                          AND upper(boro) = \'{{boro}}\'
+                          AND zipcode=\'{{zipcode}}\'
                           AND processingflag IS NULL`;
 
   if(data.latitude && data.longitude) {
     // console.log('Updating facilities');
 
     var insert = Mustache.render(insertTemplate, {
-      
+
       // data. comes from api response
       latitude: data.latitude,
       longitude: data.longitude,
@@ -195,6 +202,7 @@ function updateFacilities(data, row) {
 
     // console.log(insert);
 
+
     db.none(insert)
     .then(function(data) {
       i++;
@@ -204,10 +212,11 @@ function updateFacilities(data, row) {
       } else {
         console.log('Done!')
       }
-      
+
     })
     .catch(function(err) {
-      console.log(err);
+      console.log('ERROR from insert: ', err)
+      console.log(insert);
     })
 
   } else {
