@@ -37,14 +37,22 @@ create_bblbin_one2one = pg_task('create_bblbin_one2one')
 create_uid = pg_task('create_uid')
 join_sourcedatainfo = pg_task('join_sourcedatainfo')
 
-standardize_fixallcaps = pg_task('standardize/standardize_fixallcaps')
-standardize_capacity = pg_task('standardize/standardize_capacity')
-standardize_oversightlevel = pg_task('standardize/standardize_oversightlevel')
-standardize_agencytag = pg_task('standardize/standardize_agencytag')
-standardize_trim = pg_task('standardize/standardize_trim')
-standardize_factypes = pg_task('standardize/standardize_factypes')
-standardize_borough = pg_task('standardize/standardize_borough')
-standardize_address = pg_task('standardize/standardize_address')
+def standardize_task(task_id):
+    return PostgresOperator(
+        task_id=task_id,
+        postgres_conn_id='facdb',
+        sql="/assembly/standardize/{0}.sql".format(task_id),
+        dag=facdb_assembly
+    )
+
+standardize_fixallcaps = standardize_task('tandardize_fixallcaps')
+standardize_capacity = standardize_task('standardize_capacity')
+standardize_oversightlevel = standardize_task('standardize_oversightlevel')
+standardize_agencytag = standardize_task('standardize_agencytag')
+standardize_trim = standardize_task('standardize_trim')
+standardize_factypes = standardize_task('standardize_factypes')
+standardize_borough = standardize_task('standardize_borough')
+standardize_address = standardize_task('standardize_address')
 
 
 ## configure (transform) each dataset and insert into master table

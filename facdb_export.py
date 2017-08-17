@@ -51,5 +51,4 @@ mkdocs_datasources = pg_task('mkdocs_datasources')
     # >> censor
 
     >> export
-    >>
 )
