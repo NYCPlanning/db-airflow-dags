@@ -86,8 +86,8 @@ function addressLookup1(row) {
         housenumber: row.addressnum.replace("/", "").replace("\"", "").replace("!", "").trim(),
         streetname: row.streetname.split(',')[0].split('#')[0].split(' - ')[0].trim(),
         zipcode: row.zipcode,
-        app_id: apiCredentials.app_id,
-        app_key: apiCredentials.app_key
+        app_id: argv.geoclient_id,
+        app_key: argv.geoclient_key
       })
 
       // console.log(apiCall1);
