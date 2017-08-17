@@ -50,16 +50,13 @@ duplicates_exactsame = pg_task('duplicates_exactsame');
 
 removeArrayDuplicates = pg_task('removeArrayDuplicates')
 
-removeFAKE_count = 0
-def removeFAKE():
-    global removeFAKE_count
+def removeFAKE(count):
     return PostgresOperator(
-        task_id="removeFAKE_" + str(removeFAKE_count),
+        task_id="removeFAKE_" + str(count),
         postgres_conn_id='facdb',
         sql="/deduping/removeFAKE.sql",
         dag=facdb_deduping
     )
-    removeFAKE_count += 1
 
 ## DEDUPING
 
@@ -68,26 +65,26 @@ def removeFAKE():
 
     # Merge Child Care and Pre-K Duplicate records
     >> duplicates_ccprek_acs_hhs
-    >> removeFAKE()
+    >> removeFAKE(0)
     >> duplicates_ccprek_doe_acs
-    >> removeFAKE()
+    >> removeFAKE(1)
     >> duplicates_ccprek_doe_dohmh
-    >> removeFAKE()
+    >> removeFAKE(2)
     >> duplicates_ccprek_acs_dohmh
-    >> removeFAKE()
+    >> removeFAKE(3)
     >> duplicates_ccprek_dohmh
-    >> removeFAKE()
+    >> removeFAKE(4)
     >> duplicates_removeFAKE
-    >> removeFAKE()
+    >> removeFAKE(5)
     >> copy_backup4
 
     # Merging and dropping remaining duplicates, pre-COLP
     >> duplicates_remaining
-    >> removeFAKE()
+    >> removeFAKE(6)
 
     # Merging and dropping remaining duplicates, pre-COLP
     >> duplicates_sfpsd_relatedlots
-    >> removeFAKE()
+    >> removeFAKE(7)
 
     # Creating backup before merging and dropping COLP duplicates
     >> copy_backup5
@@ -95,31 +92,31 @@ def removeFAKE():
     # Merging and dropping COLP duplicates by BIN
     >> duplicates_colp_bin
     # Cleaning up remaining dummy values used for array_agg
-    >> removeFAKE()
+    >> removeFAKE(8)
 
     # Merging and dropping COLP duplicates by BBL
     >> duplicates_colp_bbl
     # Cleaning up remaining dummy values used for array_agg
-    >> removeFAKE()
+    >> removeFAKE(9)
 
     # Merging related COLP duplicates on surrounding BBLs
     >> duplicates_colp_relatedlots_merged
     # Cleaning up remaining dummy values used for array_agg
-    >> removeFAKE()
+    >> removeFAKE(10)
 
     # Merging remaining COLP duplicates on surrounding BBLs Part 1.
     >> duplicates_colp_relatedlots_colponly_p1
     # Cleaning up remaining dummy values used for array_agg
-    >> removeFAKE()
+    >> removeFAKE(11)
 
     # Merging remaining COLP duplicates on surrounding BBLs Part 2
     >> duplicates_colp_relatedlots_colponly_p2
     # Cleaning up remaining dummy values used for array_agg
-    >> removeFAKE()
+    >> removeFAKE(12)
 
     # Merge records that are exactly the same from the same data source
     >> duplicates_exactsame
-    >> removeFAKE()
+    >> removeFAKE(13)
 
     # Cleaning up duplicates in BIN and BBl arrays
     >> removeArrayDuplicates
