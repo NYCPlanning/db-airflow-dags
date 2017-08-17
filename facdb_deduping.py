@@ -27,7 +27,7 @@ def pg_task(task_id):
         task_id=task_id,
         postgres_conn_id='facdb',
         sql="/deduping/{0}.sql".format(task_id),
-        dag=facdb_geoprocessing
+        dag=facdb_deduping
     )
 
 copy_backup4 = pg_task('copy_backup4')
@@ -56,7 +56,7 @@ def removeFAKE():
         task_id="removeFAKE_" + removeFAKE_count,
         postgres_conn_id='facdb',
         sql="/deduping/removeFAKE.sql",
-        dag=facdb_geoprocessing
+        dag=facdb_deduping
     )
     removeFAKE_count += 1
 
