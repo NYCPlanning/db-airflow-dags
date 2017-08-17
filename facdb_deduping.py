@@ -52,6 +52,7 @@ removeArrayDuplicates = pg_task('removeArrayDuplicates')
 
 removeFAKE_count = 0
 def removeFAKE():
+    global removeFAKE_count
     return PostgresOperator(
         task_id="removeFAKE_" + removeFAKE_count,
         postgres_conn_id='facdb',
