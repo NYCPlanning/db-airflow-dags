@@ -27,15 +27,13 @@ def pg_task(task_id):
         task_id=task_id,
         postgres_conn_id='facdb',
         params={
-            "export_dir": "/"
+            "export_dir": "/home/airflow/airflow/output/facdb"
         },
         sql="/export/{0}.sql".format(task_id),
         dag=facdb_export
     )
 
-# censor = pg_task('censor')
-
-
+censor = pg_task('censor')
 export = pg_task('export')
 export_allbeforemerging = pg_task('export_allbeforemerging')
 export_unmapped = pg_task('export_unmapped')
@@ -47,8 +45,6 @@ mkdocs_datasources = pg_task('mkdocs_datasources')
 
 (
     facdb_export
-
-    # >> censor
-
+    >> censor
     >> export
 )

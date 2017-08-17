@@ -45,7 +45,7 @@ def standardize_task(task_id):
         dag=facdb_assembly
     )
 
-standardize_fixallcaps = standardize_task('tandardize_fixallcaps')
+standardize_fixallcaps = standardize_task('standardize_fixallcaps')
 standardize_capacity = standardize_task('standardize_capacity')
 standardize_oversightlevel = standardize_task('standardize_oversightlevel')
 standardize_agencytag = standardize_task('standardize_agencytag')
