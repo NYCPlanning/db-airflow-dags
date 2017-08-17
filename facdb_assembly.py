@@ -78,5 +78,5 @@ for task_file in os.listdir("/home/airflow/airflow/dags/assembly/config"):
     >> standardize_borough
     >> standardize_address
     >> create_bblbin_one2one
-    >> create_uuid
+    >> create_uid
 )
