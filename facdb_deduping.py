@@ -74,8 +74,6 @@ def removeFAKE(count):
     >> removeFAKE(3)
     >> duplicates_ccprek_dohmh
     >> removeFAKE(4)
-    >> duplicates_removeFAKE
-    >> removeFAKE(5)
     >> copy_backup4
 
     # Merging and dropping remaining duplicates, pre-COLP
