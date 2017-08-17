@@ -85,7 +85,7 @@ function addressLookup1(row) {
         housenumber: row.addressnum.replace("/", "").replace("\"", "").replace("!", "").trim(),
         streetname: row.streetname.split(',')[0].split('#')[0].split(' - ')[0].split('(')[0].split(';')[0].split('Suite')[0].split('Ste')[0].split('Apt')[0].split('apt')[0].split('Room')[0].split('Rm')[0].split('Box')[0].split('Unit')[0].trim(),
         boro: row.boro.trim(),
-        app_id: argv.geoclient_id
+        app_id: argv.geoclient_id,
         app_key: argv.geoclient_key
       })
 
