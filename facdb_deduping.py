@@ -54,7 +54,7 @@ removeFAKE_count = 0
 def removeFAKE():
     global removeFAKE_count
     return PostgresOperator(
-        task_id="removeFAKE_" + removeFAKE_count,
+        task_id="removeFAKE_" + str(removeFAKE_count),
         postgres_conn_id='facdb',
         sql="/deduping/removeFAKE.sql",
         dag=facdb_deduping
