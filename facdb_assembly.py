@@ -54,8 +54,10 @@ standardize_factypes = standardize_task('standardize_factypes')
 standardize_borough = standardize_task('standardize_borough')
 standardize_address = standardize_task('standardize_address')
 
+## ORDER TASKS
 
-## configure (transform) each dataset and insert into master table
+facdb_assembly >> create
+
 for task_file in os.listdir("/home/airflow/airflow/dags/assembly/config"):
     config = PostgresOperator(
         task_id=task_file[:-4],
@@ -63,7 +65,7 @@ for task_file in os.listdir("/home/airflow/airflow/dags/assembly/config"):
         sql="/assembly/config/" + task_file,
         dag=facdb_assembly
     )
-    create_facdb >> config >> join_sourcedatainfo
+    create >> config >> join_sourcedatainfo
 
 (
     join_sourcedatainfo

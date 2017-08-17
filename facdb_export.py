@@ -27,7 +27,7 @@ def pg_task(task_id):
         task_id=task_id,
         postgres_conn_id='facdb',
         params={
-            export_dir: "/"
+            "export_dir": "/"
         },
         sql="/export/{0}.sql".format(task_id),
         dag=facdb_export
