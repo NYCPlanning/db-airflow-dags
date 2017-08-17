@@ -21,6 +21,7 @@ var argv = require('minimist')(process.argv.slice(2));
 var db = pgp({
   database: argv.db,
   user: argv.db_user,
+  password: argv.db_pass
 });
 
 
