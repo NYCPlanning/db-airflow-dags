@@ -42,11 +42,8 @@ export_uid_key = pg_task('export_uid_key')
 mkdocs_datasources = pg_task('mkdocs_datasources')
 
 ## EXPORT ORDER
- (
-    facdb_export
-    >> censor
- )
 
+facdb_export >> censor
 export << censor
 export_allbeforemerging << censor
 export_unmapped << censor
