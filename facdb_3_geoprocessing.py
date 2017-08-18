@@ -48,7 +48,7 @@ copy_backup3 = pg_task('copy_backup3')
 standardize_address = PostgresOperator(
     task_id='standardize_address',
     postgres_conn_id='facdb',
-    sql='/assembly/standardize/standardize_address.sql',
+    sql='/facdb_2_assembly/standardize/standardize_address.sql',
     dag=facdb_3_geoprocessing
 )
 
