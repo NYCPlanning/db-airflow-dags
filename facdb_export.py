@@ -26,9 +26,9 @@ def pg_task(task_id):
     return PostgresOperator(
         task_id=task_id,
         postgres_conn_id='facdb',
-        params={
-            "export_dir": "/home/airflow/airflow/output/facdb"
-        },
+        params=dict(
+            EXPORT_DIR="/home/airflow/airflow/output/facdb"
+        ),
         sql="/export/{0}.sql".format(task_id),
         dag=facdb_export
     )

@@ -88,4 +88,4 @@ COPY (
 	ORDER BY
 		-- domain, facgroup, facsubgroup, factype
 		RANDOM()
-) TO '{{ params.export_dir }}/facdb_facilities.csv' WITH CSV DELIMITER ',' HEADER;
+) TO '{{ params.EXPORT_DIR }}/facdb_facilities.csv' WITH CSV DELIMITER ',' HEADER;

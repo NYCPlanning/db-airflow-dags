@@ -18,4 +18,4 @@ COPY (
 		using_01 = '1'
 	ORDER BY
 		datasourcefull
-) TO '{{ params.export_dir }}/facdb_datasources_docs.txt' WITH CSV DELIMITER '~' HEADER;
+) TO '{{ params.EXPORT_DIR }}/facdb_datasources_docs.txt' WITH CSV DELIMITER '~' HEADER;
