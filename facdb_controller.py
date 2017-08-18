@@ -55,7 +55,7 @@ facdb_5_export = dag_run('facdb_5_export')
 def dag_listen(dag):
     return ExternalTaskSensor(
         external_dag_id=dag,
-        external_task_id=external_task_id + "_complete"
+        external_task_id=dag + "_complete"
     )
 
 facdb_1_download_listen = dag_listen('facdb_1_download')
