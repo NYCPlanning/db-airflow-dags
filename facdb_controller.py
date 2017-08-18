@@ -23,7 +23,7 @@ facbdb_controller = DAG(
     default_args=default_args
 )
 
-def yes_trigger():
+def yes_trigger(x, y):
     return True
 
 trigger_email = EmailOperator(
