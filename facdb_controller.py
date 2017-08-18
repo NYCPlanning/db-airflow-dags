@@ -3,7 +3,7 @@ from airflow.models import DAG
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.email_operator import EmailOperator
 from airflow.operators.dagrun_operator import TriggerDagRunOperator
-from airflow.operators.external_task_sensor import ExternalTaskSensor
+from airflow.operators.sensors import ExternalTaskSensor
 
 from datetime import datetime, timedelta
 
