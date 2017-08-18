@@ -5,19 +5,10 @@ from airflow.operators.bash_operator import BashOperator
 
 from datetime import datetime, timedelta
 
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'start_date': datetime(2017, 7, 1),
-    # 'email': ['jpichot@planning.nyc.gov'],
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 0,
-    'retry_delay': timedelta(minutes=5),
-}
-
-facdb_geoprocessing = DAG(
-    'facdb_geoprocessing',
+# Define DAG
+import default_dag_args
+facdb_3_geoprocessing = DAG(
+    'facdb_3_geoprocessing',
     schedule_interval=None,
     default_args=default_args
 )
@@ -27,8 +18,8 @@ def pg_task(task_id):
     return PostgresOperator(
         task_id=task_id,
         postgres_conn_id='facdb',
-        sql="/geoprocessing/{0}.sql".format(task_id),
-        dag=facdb_geoprocessing
+        sql="/facdb_3_geoprocessing/{0}.sql".format(task_id),
+        dag=facdb_3_geoprocessing
     )
 
 force2D = pg_task('force2D')
@@ -60,7 +51,7 @@ standardize_address = PostgresOperator(
     task_id='standardize_address',
     postgres_conn_id='facdb',
     sql='/assembly/standardize/standardize_address.sql',
-    dag=facdb_geoprocessing
+    dag=facdb_3_geoprocessing
 )
 
 ## JS TASKS
@@ -74,22 +65,22 @@ connection_params = {
 
 geoclient_boro = BashOperator(
     task_id='geoclient_boro',
-    bash_command='npm run geoclient_boro --prefix=~/airflow/dags/geoprocessing/geoclient -- --db={{ params.db }} --db_user={{ params.db_user }} --db_pass={{ params.db_pass }} --geoclient_id={{ params.geoclient_id }} --geoclient_key={{ params.geoclient_key }}',
+    bash_command='npm run geoclient_boro --prefix=~/airflow/dags/facdb_3_geoprocessing/geoclient -- --db={{ params.db }} --db_user={{ params.db_user }} --db_pass={{ params.db_pass }} --geoclient_id={{ params.geoclient_id }} --geoclient_key={{ params.geoclient_key }}',
     params=connection_params,
-    dag=facdb_geoprocessing
+    dag=facdb_3_geoprocessing
 )
 
 geoclient_zipcode = BashOperator(
     task_id='geoclient_zipcode',
-    bash_command='npm run geoclient_zipcode --prefix=~/airflow/dags/geoprocessing/geoclient -- --db={{ params.db }} --db_user={{ params.db_user }} --db_pass={{ params.db_pass }} --geoclient_id={{ params.geoclient_id }} --geoclient_key={{ params.geoclient_key }}',
+    bash_command='npm run geoclient_zipcode --prefix=~/airflow/dags/facdb_3_geoprocessing/geoclient -- --db={{ params.db }} --db_user={{ params.db_user }} --db_pass={{ params.db_pass }} --geoclient_id={{ params.geoclient_id }} --geoclient_key={{ params.geoclient_key }}',
     params=connection_params,
-    dag=facdb_geoprocessing
+    dag=facdb_3_geoprocessing
 )
 
 # TASK ORDER
 
 (
-    facdb_geoprocessing
+    facdb_3_geoprocessing
 
     ## PREPPING DATA
 

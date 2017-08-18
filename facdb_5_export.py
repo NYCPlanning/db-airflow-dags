@@ -3,21 +3,12 @@ from airflow.operators.postgres_operator import PostgresOperator
 
 from datetime import datetime, timedelta
 
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'start_date': datetime(2017, 7, 1),
-    # 'email': ['jpichot@planning.nyc.gov'],
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 0,
-    'retry_delay': timedelta(minutes=5),
-}
-
-facdb_export = DAG(
-    'facdb_export',
+# Define DAG
+import default_dag_args
+facdb_5_export = DAG(
+    'facdb_5_export',
     schedule_interval=None,
-    default_args=default_args
+    default_args=default_dag_args
 )
 
 ## DEFINE TASKS
@@ -29,8 +20,8 @@ def pg_task(task_id):
         params={
             "export_dir": "/home/airflow/airflow/output/facdb"
         },
-        sql="/export/{0}.sql".format(task_id),
-        dag=facdb_export
+        sql="/facdb_5_export/{0}.sql".format(task_id),
+        dag=facdb_5_export
     )
 
 censor = pg_task('censor')
@@ -43,7 +34,7 @@ mkdocs_datasources = pg_task('mkdocs_datasources')
 
 ## EXPORT ORDER
 
-facdb_export >> censor
+facdb_5_export >> censor
 export << censor
 export_allbeforemerging << censor
 export_unmapped << censor

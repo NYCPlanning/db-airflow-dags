@@ -1,4 +1,22 @@
-facdb = [
+import os
+
+from airflow.models import DAG
+from airflow.models import Variable
+from airflow.operators.bash_operator import BashOperator
+from airflow.operators.postgres_operator import PostgresOperator
+
+from datetime import datetime, timedelta
+
+# Define DAG
+import default_dag_args
+facdb_1_download = DAG(
+    'facdb_1_download',
+    schedule_interval=None,
+    default_args=default_dag_args
+)
+
+# Scripts to Load
+data_sources = [
     "facdb_datasources",
     "facdb_uid_key",
     "dcp_facilities_togeocode",
@@ -62,3 +80,36 @@ facdb = [
     "hra_facilities_centers",
     "sbs_facilities_workforce1",
 ]
+
+# Loop over each download source, creating adding get, push, and after (if defined) tasks
+for source in data_sources.facdb:
+    params = {
+        "source": source,
+        "ftp_user": Variable.get('FTP_USER'),
+        "ftp_pass": Variable.get('FTP_PASS'),
+        "download_dir": Variable.get('DOWNLOAD_DIR'),
+        "db": "af_facdb",
+        "db_user": "airflow",
+    }
+
+    get = BashOperator(
+        task_id='get_' + source,
+        bash_command='npm run get {{ params.source }} --prefix=~/airflow/dags/facdb_1_download -- --ftp_user={{ params.ftp_user }} --ftp_pass={{ params.ftp_pass }} --download_dir={{ params.download_dir }}',
+        params=params,
+        dag=facdb_1_download)
+
+    push = BashOperator(
+        task_id='push_' + source,
+        bash_command="npm run push {{ params.source }} --prefix=~/airflow/dags/facdb_1_download -- --db={{ params.db }} --db_user={{ params.db_user }} --download_dir={{ params.download_dir }}",
+        params=params,
+        dag=facdb_1_download)
+    push.set_upstream(get)
+
+    if os.path.isfile("/home/airflow/airflow/dags/facdb_1_download/datasets/{0}/after.sql".format(source)):
+        after = PostgresOperator(
+            task_id='after_' + source,
+            postgres_conn_id='facdb',
+            sql="/facdb_1_download/datasets/{0}/after.sql".format(source),
+            dag=facdb_1_download
+        )
+        after.set_upstream(push)

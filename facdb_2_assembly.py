@@ -5,21 +5,12 @@ from airflow.operators.postgres_operator import PostgresOperator
 
 from datetime import datetime, timedelta
 
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'start_date': datetime(2017, 7, 1),
-    # 'email': ['jpichot@planning.nyc.gov'],
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 0,
-    'retry_delay': timedelta(minutes=5),
-}
-
-facdb_assembly = DAG(
-    'facdb_assembly',
+# Define DAG
+import default_dag_args
+facdb_2_assembly = DAG(
+    'facdb_2_assembly',
     schedule_interval=None,
-    default_args=default_args
+    default_args=default_dag_args
 )
 
 ## GENERATE TASKS
@@ -28,8 +19,8 @@ def pg_task(task_id):
     return PostgresOperator(
         task_id=task_id,
         postgres_conn_id='facdb',
-        sql="/assembly/{0}.sql".format(task_id),
-        dag=facdb_assembly
+        sql="/facdb_2_assembly/{0}.sql".format(task_id),
+        dag=facdb_2_assembly
     )
 
 create = pg_task('create')
@@ -41,8 +32,8 @@ def standardize_task(task_id):
     return PostgresOperator(
         task_id=task_id,
         postgres_conn_id='facdb',
-        sql="/assembly/standardize/{0}.sql".format(task_id),
-        dag=facdb_assembly
+        sql="/facdb_2_assembly/standardize/{0}.sql".format(task_id),
+        dag=facdb_2_assembly
     )
 
 standardize_fixallcaps = standardize_task('standardize_fixallcaps')
@@ -56,14 +47,14 @@ standardize_address = standardize_task('standardize_address')
 
 ## ORDER TASKS
 
-facdb_assembly >> create
+facdb_2_assembly >> create
 
-for task_file in os.listdir("/home/airflow/airflow/dags/assembly/config"):
+for task_file in os.listdir("/home/airflow/airflow/dags/facdb_2_assembly/config"):
     config = PostgresOperator(
         task_id=task_file[:-4],
         postgres_conn_id='facdb',
-        sql="/assembly/config/" + task_file,
-        dag=facdb_assembly
+        sql="/facdb_2_assembly/config/" + task_file,
+        dag=facdb_2_assembly
     )
     create >> config >> join_sourcedatainfo
 

@@ -4,21 +4,12 @@ from airflow.operators.postgres_operator import PostgresOperator
 
 from datetime import datetime, timedelta
 
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'start_date': datetime(2017, 7, 1),
-    # 'email': ['jpichot@planning.nyc.gov'],
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 0,
-    'retry_delay': timedelta(minutes=5),
-}
-
-facdb_deduping = DAG(
-    'facdb_deduping',
+# Define DAG
+import default_dag_args
+facdb_4_deduping = DAG(
+    'facdb_4_deduping',
     schedule_interval=None,
-    default_args=default_args
+    default_args=default_dag_args
 )
 
 ## DEFINE TASKS
@@ -26,8 +17,8 @@ def pg_task(task_id):
     return PostgresOperator(
         task_id=task_id,
         postgres_conn_id='facdb',
-        sql="/deduping/{0}.sql".format(task_id),
-        dag=facdb_deduping
+        sql="/facdb_4_deduping/{0}.sql".format(task_id),
+        dag=facdb_4_deduping
     )
 
 copy_backup4 = pg_task('copy_backup4')
@@ -54,14 +45,14 @@ def removeFAKE(count):
     return PostgresOperator(
         task_id="removeFAKE_" + str(count),
         postgres_conn_id='facdb',
-        sql="/deduping/duplicates_removeFAKE.sql",
-        dag=facdb_deduping
+        sql="/facdb_4_deduping/duplicates_removeFAKE.sql",
+        dag=facdb_4_deduping
     )
 
 ## DEDUPING
 
 (
-    facdb_deduping # The DAG kicks it off
+    facdb_4_deduping # The DAG kicks it off
 
     # Merge Child Care and Pre-K Duplicate records
     >> duplicates_ccprek_acs_hhs
