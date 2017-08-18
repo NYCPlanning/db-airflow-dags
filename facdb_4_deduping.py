@@ -3,11 +3,11 @@ from airflow.models import Variable
 from airflow.operators.postgres_operator import PostgresOperator
 
 # Define DAG
-import default_dag_args
+import defaults
 facdb_4_deduping = DAG(
     'facdb_4_deduping',
     schedule_interval=None,
-    default_args=default_dag_args
+    default_args=defaults.dag_args
 )
 
 ## DEFINE TASKS

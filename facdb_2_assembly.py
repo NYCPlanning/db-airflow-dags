@@ -4,11 +4,11 @@ from airflow.models import DAG
 from airflow.operators.postgres_operator import PostgresOperator
 
 # Define DAG
-import default_dag_args
+import defaults
 facdb_2_assembly = DAG(
     'facdb_2_assembly',
     schedule_interval=None,
-    default_args=default_dag_args
+    default_args=defaults.dag_args
 )
 
 ## GENERATE TASKS

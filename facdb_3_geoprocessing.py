@@ -4,11 +4,11 @@ from airflow.operators.postgres_operator import PostgresOperator
 from airflow.operators.bash_operator import BashOperator
 
 # Define DAG
-import default_dag_args
+import defaults
 facdb_3_geoprocessing = DAG(
     'facdb_3_geoprocessing',
     schedule_interval=None,
-    default_args=default_args
+    default_args=defaults.dag_args
 )
 
 ## TASK GENERATION

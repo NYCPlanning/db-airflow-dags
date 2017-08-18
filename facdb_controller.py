@@ -31,7 +31,7 @@ trigger_email = EmailOperator(
     to=['jpichot@planning.nyc.gov'],
     subject='[Airflow] FacDB Generation Has Begun',
     html_content='⚡️ engineering the datas ⚡️',
-    dag=facbdb_download
+    dag=facbdb_controller
 )
 
 def dag_run(dag):

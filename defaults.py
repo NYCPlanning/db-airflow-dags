@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-default_dag_args = {
+dag_args = {
     'owner': 'airflow',
     'depends_on_past': False,
     'start_date': datetime(2017, 7, 1),
