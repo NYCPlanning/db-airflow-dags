@@ -1,6 +1,7 @@
 import os
 
 from airflow.models import DAG
+from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.postgres_operator import PostgresOperator
 
 # Define DAG
@@ -43,6 +44,11 @@ standardize_factypes = standardize_task('standardize_factypes')
 standardize_borough = standardize_task('standardize_borough')
 standardize_address = standardize_task('standardize_address')
 
+facdb_2_assembly_complete = DummyOperator(
+    task_id='facdb_2_assembly_complete',
+    dag=facdb_2_assembly
+)
+
 ## ORDER TASKS
 
 facdb_2_assembly >> create
@@ -68,4 +74,5 @@ for task_file in os.listdir("/home/airflow/airflow/dags/facdb_2_assembly/config"
     >> standardize_address
     >> create_bblbin_one2one
     >> create_uid
+    >> facdb_2_assembly_complete
 )

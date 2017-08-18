@@ -1,5 +1,6 @@
 from airflow.models import DAG
 from airflow.operators.postgres_operator import PostgresOperator
+from airflow.operators.dummy_operator import DummyOperator
 
 # Define DAG
 import defaults
@@ -30,12 +31,18 @@ export_datasources = pg_task('export_datasources')
 export_uid_key = pg_task('export_uid_key')
 mkdocs_datasources = pg_task('mkdocs_datasources')
 
+facdb_5_export_complete = DummyOperator(
+    task_id='facdb_5_export_complete',
+    dag=facdb_5_export
+)
+
 ## EXPORT ORDER
 
 facdb_5_export >> censor
-export << censor
-export_allbeforemerging << censor
-export_unmapped << censor
-export_datasources << censor
-export_uid_key << censor
-mkdocs_datasources << censor
+
+censor >> export >> facdb_5_export_complete
+censor >> export_allbeforemerging >> facdb_5_export_complete
+censor >> export_unmapped >> facdb_5_export_complete
+censor >> export_datasources >> facdb_5_export_complete
+censor >> export_uid_key >> facdb_5_export_complete
+censor >> mkdocs_datasources >> facdb_5_export_complete

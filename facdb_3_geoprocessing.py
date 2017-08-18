@@ -1,6 +1,7 @@
 from airflow.models import DAG
 from airflow.models import Variable
 from airflow.operators.postgres_operator import PostgresOperator
+from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.bash_operator import BashOperator
 
 # Define DAG
@@ -49,6 +50,11 @@ standardize_address = PostgresOperator(
     task_id='standardize_address',
     postgres_conn_id='facdb',
     sql='/facdb_2_assembly/standardize/standardize_address.sql',
+    dag=facdb_3_geoprocessing
+)
+
+facdb_3_geoprocessing_complete = DummyOperator(
+    task_id='facdb_3_geoprocessing_complete',
     dag=facdb_3_geoprocessing
 )
 
@@ -152,4 +158,7 @@ geoclient_zipcode = BashOperator(
 
     # Create backup table before merging and dropping duplicates
     >> copy_backup3
+
+    # Signal complete
+    >> facdb_3_geoprocessing_complete
 )

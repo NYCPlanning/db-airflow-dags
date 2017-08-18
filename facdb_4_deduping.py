@@ -1,6 +1,7 @@
 from airflow.models import DAG
 from airflow.models import Variable
 from airflow.operators.postgres_operator import PostgresOperator
+from airflow.operators.dummy_operator import DummyOperator
 
 # Define DAG
 import defaults
@@ -46,6 +47,11 @@ def removeFAKE(count):
         sql="/facdb_4_deduping/duplicates_removeFAKE.sql",
         dag=facdb_4_deduping
     )
+
+facdb_4_deduping_complete = DummyOperator(
+    task_id='facdb_4_deduping_complete',
+    dag=facdb_4_deduping
+)
 
 ## DEDUPING
 
@@ -109,4 +115,7 @@ def removeFAKE(count):
     >> removeArrayDuplicates
 
     >> copy_backup6
+
+    # Signal complete
+    >> facdb_4_deduping_complete
 )

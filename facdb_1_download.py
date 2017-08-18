@@ -3,6 +3,7 @@ import os
 from airflow.models import DAG
 from airflow.models import Variable
 from airflow.operators.bash_operator import BashOperator
+from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.postgres_operator import PostgresOperator
 
 # Define DAG
@@ -79,6 +80,11 @@ data_sources = [
     "sbs_facilities_workforce1",
 ]
 
+facdb_1_download_complete = DummyOperator(
+    task_id='facdb_1_download_complete',
+    dag=facdb_1_download
+)
+
 # Loop over each download source, creating adding get, push, and after (if defined) tasks
 for source in data_sources:
     params = {
@@ -101,7 +107,8 @@ for source in data_sources:
         bash_command="npm run push {{ params.source }} --prefix=~/airflow/dags/facdb_1_download -- --db={{ params.db }} --db_user={{ params.db_user }} --download_dir={{ params.download_dir }}",
         params=params,
         dag=facdb_1_download)
-    push.set_upstream(get)
+
+    get >> push
 
     if os.path.isfile("/home/airflow/airflow/dags/facdb_1_download/datasets/{0}/after.sql".format(source)):
         after = PostgresOperator(
@@ -110,4 +117,6 @@ for source in data_sources:
             sql="/facdb_1_download/datasets/{0}/after.sql".format(source),
             dag=facdb_1_download
         )
-        after.set_upstream(push)
+        push >> after >> facdb_1_download_complete
+    else:
+        push >> facdb_1_download_complete
