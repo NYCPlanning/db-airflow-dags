@@ -80,7 +80,7 @@ data_sources = [
 ]
 
 # Loop over each download source, creating adding get, push, and after (if defined) tasks
-for source in data_sources.facdb:
+for source in data_sources:
     params = {
         "source": source,
         "ftp_user": Variable.get('FTP_USER'),
