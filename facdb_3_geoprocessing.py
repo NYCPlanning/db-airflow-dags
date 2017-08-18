@@ -3,8 +3,6 @@ from airflow.models import Variable
 from airflow.operators.postgres_operator import PostgresOperator
 from airflow.operators.bash_operator import BashOperator
 
-from datetime import datetime, timedelta
-
 # Define DAG
 import default_dag_args
 facdb_3_geoprocessing = DAG(

@@ -4,7 +4,7 @@ from airflow.operators.bash_operator import BashOperator
 from airflow.operators.email_operator import EmailOperator
 from airflow.operators.dagrun_operator import TriggerDagRunOperator
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
 default_args = {
     'owner': 'airflow',

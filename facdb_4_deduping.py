@@ -2,8 +2,6 @@ from airflow.models import DAG
 from airflow.models import Variable
 from airflow.operators.postgres_operator import PostgresOperator
 
-from datetime import datetime, timedelta
-
 # Define DAG
 import default_dag_args
 facdb_4_deduping = DAG(

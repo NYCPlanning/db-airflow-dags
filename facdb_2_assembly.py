@@ -3,8 +3,6 @@ import os
 from airflow.models import DAG
 from airflow.operators.postgres_operator import PostgresOperator
 
-from datetime import datetime, timedelta
-
 # Define DAG
 import default_dag_args
 facdb_2_assembly = DAG(
