@@ -39,6 +39,7 @@ def dag_run(dag):
         task_id=dag,
         trigger_dag_id=dag,
         python_callable=yes_trigger,
+        depends_on_past=True,
         dag=facbdb_controller
     )
 
