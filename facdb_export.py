@@ -43,8 +43,8 @@ mkdocs_datasources = pg_task('mkdocs_datasources')
 
 ## EXPORT ORDER
  (
-     facdb_export
-     >> censor
+    facdb_export
+    >> censor
  )
 
 export << censor
