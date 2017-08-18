@@ -56,7 +56,8 @@ def dag_listen(dag):
     return ExternalTaskSensor(
         task_id=dag + "_listen",
         external_dag_id=dag,
-        external_task_id=dag + "_complete"
+        external_task_id=dag + "_complete",
+        dag=facbdb_controller
     )
 
 facdb_1_download_listen = dag_listen('facdb_1_download')
