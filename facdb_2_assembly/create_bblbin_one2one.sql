@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS bblbin_one2one;
 CREATE TABLE bblbin_one2one AS (
     WITH bincounts AS (
         SELECT
