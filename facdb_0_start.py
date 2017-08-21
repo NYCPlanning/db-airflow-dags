@@ -26,7 +26,7 @@ trigger_email = EmailOperator(
     to=['jpichot@planning.nyc.gov'],
     subject='[Airflow] FacDB Generation Has Begun',
     html_content='⚡️ engineering the datas ⚡️',
-    dag=facdb_start
+    dag=facdb_0_start
 )
 
 def yes_trigger(_, dag):
@@ -36,7 +36,7 @@ trigger_facdb_run = TriggerDagRunOperator(
     task_id='trigger_facdb_run',
     trigger_dag_id='facdb_1_download',
     python_callable=yes_trigger,
-    dag=facdb_start
+    dag=facdb_0_start
 )
 
 # Task Order
