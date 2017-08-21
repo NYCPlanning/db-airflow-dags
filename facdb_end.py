@@ -2,7 +2,7 @@ from airflow.models import DAG
 from airflow.models import Variable
 
 from airflow.operators.email_operator import EmailOperator
-from airflow.operators.slack_operator import SlackOperator
+from airflow.operators.slack_operator import SlackAPIPostOperator
 
 from datetime import datetime, timedelta
 
@@ -21,7 +21,7 @@ facdb_end = DAG(
     }
 )
 
-slack_msg = SlackOperator(
+slack_msg = SlackAPIPostOperator(
     task_id='slack_msg',
     dag=facdb_end,
     channel='#capitalplanning-bots',
