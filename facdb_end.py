@@ -26,7 +26,7 @@ slack_msg = SlackAPIPostOperator(
     dag=facdb_end,
     channel='#capitalplanning-bots',
     username='airflow',
-    message='[FacDB] ⚡️ datas have been engineered ⚡️',
+    text='[FacDB] ⚡️ the datas have been engineered. a new FacDB has is minted. ⚡️',
     token=Variable.get('SLACK_TOKEN')
 )
 
