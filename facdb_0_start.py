@@ -5,8 +5,8 @@ from airflow.operators.dagrun_operator import TriggerDagRunOperator
 
 from datetime import datetime, timedelta
 
-facdb_start = DAG(
-    'facdb_start',
+facdb_0_start = DAG(
+    'facdb_0_start',
     schedule_interval='@monthly',
     default_args={
         'owner': 'airflow',
@@ -42,7 +42,7 @@ trigger_facdb_run = TriggerDagRunOperator(
 # Task Order
 
 (
-    facdb_start
+    facdb_0_start
     >> trigger_email
     >> trigger_facdb_run
 )
