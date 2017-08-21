@@ -45,9 +45,9 @@ trigger_facdb_end = TriggerDagRunOperator(
 
 facdb_5_export >> censor
 
-censor >> export >> facdb_5_export_complete
-censor >> export_allbeforemerging >> facdb_5_export_complete
-censor >> export_unmapped >> facdb_5_export_complete
-censor >> export_datasources >> facdb_5_export_complete
-censor >> export_uid_key >> facdb_5_export_complete
-censor >> mkdocs_datasources >> facdb_5_export_complete
+censor >> export >> trigger_facdb_end
+censor >> export_allbeforemerging >> trigger_facdb_end
+censor >> export_unmapped >> trigger_facdb_end
+censor >> export_datasources >> trigger_facdb_end
+censor >> export_uid_key >> trigger_facdb_end
+censor >> mkdocs_datasources >> trigger_facdb_end
