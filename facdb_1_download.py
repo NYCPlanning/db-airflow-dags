@@ -3,8 +3,8 @@ import os
 from airflow.models import DAG
 from airflow.models import Variable
 from airflow.operators.bash_operator import BashOperator
-from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.postgres_operator import PostgresOperator
+from airflow.operators.dagrun_operator import TriggerDagRunOperator
 
 # Define DAG
 import defaults
@@ -80,8 +80,13 @@ data_sources = [
     "sbs_facilities_workforce1",
 ]
 
-facdb_1_download_complete = DummyOperator(
-    task_id='facdb_1_download_complete',
+def yes_trigger(_, dag):
+    return dag
+
+trigger_facdb_2_assembly = TriggerDagRunOperator(
+    task_id='trigger_facdb_2_assembly',
+    trigger_dag_id='facdb_2_assembly',
+    python_callable=yes_trigger,
     dag=facdb_1_download
 )
 
@@ -117,6 +122,6 @@ for source in data_sources:
             sql="/facdb_1_download/datasets/{0}/after.sql".format(source),
             dag=facdb_1_download
         )
-        push >> after >> facdb_1_download_complete
+        push >> after >> trigger_facdb_2_assembly
     else:
-        push >> facdb_1_download_complete
+        push >> trigger_facdb_2_assembly

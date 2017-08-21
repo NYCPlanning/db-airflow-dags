@@ -1,7 +1,7 @@
 from airflow.models import DAG
 from airflow.models import Variable
 from airflow.operators.postgres_operator import PostgresOperator
-from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.dagrun_operator import TriggerDagRunOperator
 from airflow.operators.bash_operator import BashOperator
 
 # Define DAG
@@ -53,8 +53,13 @@ standardize_address = PostgresOperator(
     dag=facdb_3_geoprocessing
 )
 
-facdb_3_geoprocessing_complete = DummyOperator(
-    task_id='facdb_3_geoprocessing_complete',
+def yes_trigger(_, dag):
+    return dag
+
+trigger_facdb_4_deduping = TriggerDagRunOperator(
+    task_id='trigger_facdb_4_deduping',
+    trigger_dag_id='facdb_4_deduping',
+    python_callable=yes_trigger,
     dag=facdb_3_geoprocessing
 )
 
@@ -160,5 +165,5 @@ geoclient_zipcode = BashOperator(
     >> copy_backup3
 
     # Signal complete
-    >> facdb_3_geoprocessing_complete
+    >> trigger_facdb_4_deduping
 )

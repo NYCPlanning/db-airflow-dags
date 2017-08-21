@@ -1,8 +1,9 @@
 import os
 
 from airflow.models import DAG
-from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.postgres_operator import PostgresOperator
+from airflow.operators.dagrun_operator import TriggerDagRunOperator
+
 
 # Define DAG
 import defaults
@@ -44,8 +45,13 @@ standardize_factypes = standardize_task('standardize_factypes')
 standardize_borough = standardize_task('standardize_borough')
 standardize_address = standardize_task('standardize_address')
 
-facdb_2_assembly_complete = DummyOperator(
-    task_id='facdb_2_assembly_complete',
+def yes_trigger(_, dag):
+    return dag
+
+trigger_facdb_3_geoprocessing = TriggerDagRunOperator(
+    task_id='trigger_facdb_3_geoprocessing',
+    trigger_dag_id='facdb_3_geoprocessing',
+    python_callable=yes_trigger,
     dag=facdb_2_assembly
 )
 
@@ -74,5 +80,5 @@ for task_file in os.listdir("/home/airflow/airflow/dags/facdb_2_assembly/config"
     >> standardize_address
     >> create_bblbin_one2one
     >> create_uid
-    >> facdb_2_assembly_complete
+    >> trigger_facdb_3_geoprocessing
 )

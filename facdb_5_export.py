@@ -1,6 +1,6 @@
 from airflow.models import DAG
 from airflow.operators.postgres_operator import PostgresOperator
-from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.dagrun_operator import TriggerDagRunOperator
 
 # Define DAG
 import defaults
@@ -31,8 +31,13 @@ export_datasources = pg_task('export_datasources')
 export_uid_key = pg_task('export_uid_key')
 mkdocs_datasources = pg_task('mkdocs_datasources')
 
-facdb_5_export_complete = DummyOperator(
-    task_id='facdb_5_export_complete',
+def yes_trigger(_, dag):
+    return dag
+
+trigger_facdb_end = TriggerDagRunOperator(
+    task_id='trigger_facdb_end',
+    trigger_dag_id='facdb_end',
+    python_callable=yes_trigger,
     dag=facdb_5_export
 )
 

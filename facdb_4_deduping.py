@@ -1,7 +1,7 @@
 from airflow.models import DAG
 from airflow.models import Variable
 from airflow.operators.postgres_operator import PostgresOperator
-from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.dagrun_operator import TriggerDagRunOperator
 
 # Define DAG
 import defaults
@@ -48,8 +48,13 @@ def removeFAKE(count):
         dag=facdb_4_deduping
     )
 
-facdb_4_deduping_complete = DummyOperator(
-    task_id='facdb_4_deduping_complete',
+def yes_trigger(_, dag):
+    return dag
+
+trigger_facdb_5_export = TriggerDagRunOperator(
+    task_id='trigger_facdb_5_export',
+    trigger_dag_id='facdb_5_export',
+    python_callable=yes_trigger,
     dag=facdb_4_deduping
 )
 
@@ -117,5 +122,5 @@ facdb_4_deduping_complete = DummyOperator(
     >> copy_backup6
 
     # Signal complete
-    >> facdb_4_deduping_complete
+    >> trigger_facdb_5_export
 )
