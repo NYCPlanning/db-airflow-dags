@@ -22,12 +22,12 @@ facdb_end = DAG(
 )
 
 slack_msg = SlackOperator(
-    'task_id': 'slack_msg',
-    'dag': facdb_end,
-    'channel': '#capitalplanning-bots',
-    'username': 'airflow',
-    'message': '[FacDB] ⚡️ datas have been engineered ⚡️',
-    'token': Variable.get('SLACK_TOKEN')
+    task_id='slack_msg',
+    dag=facdb_end,
+    channel='#capitalplanning-bots',
+    username='airflow',
+    message='[FacDB] ⚡️ datas have been engineered ⚡️',
+    token=Variable.get('SLACK_TOKEN')
 )
 
 facdb_end >> slack_msg
