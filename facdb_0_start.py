@@ -1,7 +1,6 @@
 from airflow.models import DAG
 from airflow.models import Variable
 
-from airflow.operators.email_operator import EmailOperator
 from airflow.operators.dagrun_operator import TriggerDagRunOperator
 from airflow.operators.slack_operator import SlackAPIPostOperator
 
@@ -20,16 +19,6 @@ facdb_0_start = DAG(
         'retries': 0,
     }
 )
-
-# Define Tasks
-
-# trigger_email = EmailOperator(
-#     task_id='trigger_email',
-#     to=['jpichot@planning.nyc.gov'],
-#     subject='[Airflow] FacDB Generation Has Begun',
-#     html_content='♻️ engineering the datas ♻️',
-#     dag=facdb_0_start
-# )
 
 trigger_slack = SlackAPIPostOperator(
     task_id='trigger_slack',
