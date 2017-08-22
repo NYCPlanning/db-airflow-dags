@@ -55,9 +55,8 @@ Exports data in final form, including ancillary and lookup tables.
 - [ ] Copy db directly to cp-web, Carto
 
 ### End (`facdb_end.py`)
-Triggers goodbye Slack message and closes.
+Moves and renames output files to permanent storage. Triggers goodbye Slack message and closes.
 
 ## Todo
 - [ ]  Clean up `/tmp` directory and leftover databases after generation
 - [ ]  Add version/date to db name
-- [ ]  Move data on publicly accessible location
