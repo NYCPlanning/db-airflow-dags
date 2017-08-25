@@ -1,8 +1,8 @@
 UPDATE facilities AS f
     SET
-        congdist = p.congdist
+        stateassemblydistrict = p.assemdist
     FROM
-        dcp_congressionaldistricts AS p
+        dcp_stateassemblydistricts AS p
     WHERE
         f.geom IS NOT NULL
         AND ST_Intersects(p.geom,f.geom)

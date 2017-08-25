@@ -50,10 +50,37 @@ def intersect_task():
         dag=facdb_3_geoprocessing
     )
 
-join_cd = pg_task('join_cd')
-join_nta = pg_task('join_nta')
-join_council = pg_task('join_council')
-join_censtract = pg_task('join_censtract')
+join_cd = intersect_task('join_cd')
+join_nta = intersect_task('join_nta')
+join_council = intersect_task('join_council')
+join_censtract = intersect_task('join_censtract')
+join_congdist = intersect_task('join_congdist')
+join_firecompanies = intersect_task('join_firecompanies')
+join_municourt = intersect_task('join_municourt')
+join_policeprecinct = intersect_task('join_policeprecinct')
+join_stateassemblydistrict = intersect_task('join_stateassemblydistrict')
+join_statesenatedistrict = intersect_task('join_statesenatedistrict')
+join_tza = intersect_task('join_tza')
+join_schooldistrict = intersect_task('join_schooldistrict')
+
+intersect_tasks = [
+    join_cd,
+    join_nta,
+    join_council,
+    join_censtract,
+    join_congdist,
+    join_firecompanies,
+    join_municourt,
+    join_policeprecinct,
+    join_stateassemblydistrict,
+    join_statesenatedistrict,
+    join_tza,
+    join_schooldistrict
+]
+
+def intersect(start, finish):
+    for intersect_task in intersect_tasks:
+        start >> intersect_task >> finish
 
 # Using sql from assembly process
 standardize_address = PostgresOperator(
@@ -159,14 +186,13 @@ geoclient_zipcode = BashOperator(
     ## Calculating lat,long and x,y for all blank records
     # Calculating x,y for all blank records...
     >> calcxy
+)
 
-    # Spatially joining with neighborhood boundaries...
-    >> join_censtract
-    >> join_nta
-    >> join_council
-    >> join_cd
+# Spatially joining with neighborhood boundaries...
+intersect(start=calcxy, finish=join_zipcode)
 
-    >> join_zipcode
+(
+    join_zipcode
     >> clean_invalidZIP
     >> clean_cityboro
 

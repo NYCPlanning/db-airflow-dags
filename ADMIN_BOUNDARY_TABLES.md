@@ -1,20 +1,20 @@
 # Admin Boundaries for all databases
 
 
-| Admin                        | Layer name               | FacDB | CPDB | HousingDB |
-|:-----------------------------|:-------------------------|:------|:-----|:----------|
-| Census Tracts                | `censtract`              | ✅     |      |           |
-| Neighborhood Tabulation Area | `nta`                    | ✅     |      |           |
-| City Council Districts       | `council`                | ✅     |      |           |
-| Community Districts          | `cd`                     | ✅     |      |           |
-| Congressional Districts      | `congdist`               | ✅     |      |           |
-| Boroughs                     | `borocode`               | ✅     |      |           |
-| Fire Divisions               | `firediv`                |       |      |           |
-| Fire Battalions              | `firebn`                 |       |      |           |
-| Fire Companies               | `fireconum`              |       |      |           |
-| Municipal Court Districts    | `municourt`              |       |      |           |
-| Police Precincts             | `policeprecincts`        |       |      |           |
-| School Districts             | `school_dist `           |       |      |           |
-| State Assembly Districts     | `stateassemblydistricts` |       |      |           |
-| State Senate Districts       | `statesenatedistricts`   |       |      |           |
-| Traffic Analysis Zones       | `tza`                    |       |      |           |
+| Admin                        | Layer name              | FacDB | CPDB | HousingDB |
+|:-----------------------------|:------------------------|:------|:-----|:----------|
+| Census Tracts                | `censtract`             | ✅     |      |           |
+| Neighborhood Tabulation Area | `nta`                   | ✅     |      |           |
+| City Council Districts       | `council`               | ✅     |      |           |
+| Community Districts          | `cd`                    | ✅     |      |           |
+| Boroughs                     | `borocode`              | ✅     |      |           |
+| Congressional Districts      | `congdist`              | ✅     |      |           |
+| Fire Divisions               | `firediv`               | ✅     |      |           |
+| Fire Battalions              | `firebn`                | ✅     |      |           |
+| Fire Companies               | `fireconum`             | ✅     |      |           |
+| Municipal Court Districts    | `municourt`             | ✅     |      |           |
+| Police Precincts             | `policeprecinctjo`      | ✅     |      |           |
+| School Districts             | `schooldistrict`        |       |      |           |
+| State Assembly Districts     | `stateassemblydistrict` | ✅     |      |           |
+| State Senate Districts       | `statesenatedistrict`   | ✅     |      |           |
+| Traffic Analysis Zones       | `tza`                   | ✅     |      |           |
