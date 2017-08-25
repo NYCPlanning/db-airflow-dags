@@ -1,5 +1,5 @@
 {
-  "url": "https://raw.githubusercontent.com/NYCPlanning/capital-planning-platform/master/public/data/TrafficAnalysisZones.geojson?token=AFWhuJjR-GQa8QHW_mDBcdMAzVy2HVN9ks5ZnI2zwA%3D%3D",
+  "url": "http://data.capitalplanning.nyc/admin/TrafficAnalysisZones.geojson",
   "saveFile": "dcp_trafficanalysiszones.json",
   "load": "org2ogr",
   "loadFiles": [
@@ -9,6 +9,6 @@
     }
   ],
   "saveFile":"dcp_trafficanalysiszones.json",
-  "ogr2ogr": [ 
+  "ogr2ogr": [
         ] 
 }
