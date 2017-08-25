@@ -24,6 +24,13 @@ facdb_end = DAG(
 
 bash_template = '''\
 mkdir /var/www/html/facdb_{{ ds_nodash }}
+
+OUTPUT=/home/airflow/airflow/output/facdb/*
+for f in $OUTPUT
+do
+  mv "$f" "${f/\./_{{ ds_nodash }}\.}"
+done
+
 cp /home/airflow/airflow/output/facdb/* /var/www/html/facdb_{{ ds_nodash }}
 '''
 
