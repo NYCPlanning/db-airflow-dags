@@ -42,7 +42,7 @@ proptype_plazas = pg_task('proptype_plazas')
 copy_backup3 = pg_task('copy_backup3')
 
 # Generate the
-def intersect_task():
+def intersect_task(task_id):
     return PostgresOperator(
         task_id=task_id,
         postgres_conn_id='facdb',
