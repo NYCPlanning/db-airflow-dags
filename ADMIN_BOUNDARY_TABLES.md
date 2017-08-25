@@ -14,7 +14,7 @@
 | Fire Companies               | `fireconum`             | ✅     |      |           |
 | Municipal Court Districts    | `municourt`             | ✅     |      |           |
 | Police Precincts             | `policeprecinctjo`      | ✅     |      |           |
-| School Districts             | `schooldistrict`        |       |      |           |
+| School Districts             | `schooldistrict`        | ✅     |      |           |
 | State Assembly Districts     | `stateassemblydistrict` | ✅     |      |           |
 | State Senate Districts       | `statesenatedistrict`   | ✅     |      |           |
 | Traffic Analysis Zones       | `tza`                   | ✅     |      |           |
