@@ -34,16 +34,26 @@ copy_backup2 = pg_task('copy_backup2')
 bin2overwritegeom = pg_task('bin2overwritegeom')
 bbl2overwritegeom = pg_task('bbl2overwritegeom')
 calcxy = pg_task('calcxy')
-join_commboard = pg_task('join_commboard')
-join_nta = pg_task('join_nta')
 join_zipcode = pg_task('join_zipcode')
 clean_invalidZIP = pg_task('clean_invalidZIP')
 clean_cityboro = pg_task('clean_cityboro')
-join_council = pg_task('join_council')
-join_censtract = pg_task('join_censtract')
 join_proptype = pg_task('join_proptype')
 proptype_plazas = pg_task('proptype_plazas')
 copy_backup3 = pg_task('copy_backup3')
+
+# Generate the
+def intersect_task():
+    return PostgresOperator(
+        task_id=task_id,
+        postgres_conn_id='facdb',
+        sql="/facdb_3_geoprocessing/intersects/{0}.sql".format(task_id),
+        dag=facdb_3_geoprocessing
+    )
+
+join_cd = pg_task('join_cd')
+join_nta = pg_task('join_nta')
+join_council = pg_task('join_council')
+join_censtract = pg_task('join_censtract')
 
 # Using sql from assembly process
 standardize_address = PostgresOperator(
@@ -151,8 +161,14 @@ geoclient_zipcode = BashOperator(
     >> calcxy
 
     # Spatially joining with neighborhood boundaries...
-    >> join_commboard >> join_nta >> join_zipcode >> clean_invalidZIP
-    >> clean_cityboro >> join_council >> join_censtract
+    >> join_censtract
+    >> join_nta
+    >> join_council
+    >> join_cd
+
+    >> join_zipcode
+    >> clean_invalidZIP
+    >> clean_cityboro
 
     # Spatially joining with COLP bbls to get propertytype...
     >> join_proptype

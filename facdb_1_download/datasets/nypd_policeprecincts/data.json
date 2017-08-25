@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/geospatial/78dh-3ptz?method=export&format=Original",
+  "saveFile": "nypd_policeprecincts.zip",
+  "load": "shp2pgsql",
+  "loadFiles": [
+    {
+      "file":"nypp_17b/nypp.shp",
+      "table": "nypd_policeprecincts"
+    }
+  ],
+  "shp2pgsql": [
+    "-d",
+    "-s 4326:4326"
+  ]
+}

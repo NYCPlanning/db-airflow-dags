@@ -30,7 +30,7 @@ COPY (
 		facilities.ycoord,
 		array_to_string(facilities.bin,';') AS bin,
 		array_to_string(facilities.bbl,';') AS bbl,
-		facilities.commboard,
+		facilities.cd,
 		facilities.council,
 		facilities.censtract,
 		facilities.nta,

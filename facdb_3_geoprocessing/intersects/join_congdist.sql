@@ -1,7 +1,7 @@
 UPDATE facilities AS f
     SET
-        commboard = p.borocd
-    FROM 
+        cd = p.borocd
+    FROM
         dcp_cdboundaries AS p
     WHERE
         f.geom IS NOT NULL

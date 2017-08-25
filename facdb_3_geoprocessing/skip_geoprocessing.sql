@@ -14,7 +14,7 @@ SET
 	ycoord = gl.ycoord,
 	bin = gl.bin,
 	bbl = gl.bbl,
-	commboard = gl.commboard,
+	cd = gl.cd,
 	council = gl.council,
 	censtract = gl.censtract,
 	nta = gl.nta
@@ -42,7 +42,7 @@ WHERE
 -- ycoord,
 -- bin,
 -- bbl,
--- commboard,
+-- cd,
 -- council,
 -- censtract,
 -- nta

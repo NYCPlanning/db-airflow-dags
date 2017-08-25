@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/geospatial/7vpq-4bh4?method=export&format=Original",
+  "saveFile": "dcp_municipalcourtdistricts.zip",
+  "load": "shp2pgsql",
+  "loadFiles": [
+    {
+      "file":"nymc_17b/nymc.shp",
+      "table": "dcp_municipalcourtdistricts"
+    }
+  ],
+  "shp2pgsql": [
+    "-d",
+    "-s 4326:4326"
+  ]
+}

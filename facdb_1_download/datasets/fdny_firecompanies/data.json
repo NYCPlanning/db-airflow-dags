@@ -1,0 +1,15 @@
+{
+  "url": "https://data.cityofnewyork.us/api/geospatial/iiv7-jaj9?method=export&format=Original",
+  "saveFile": "fdny_firecompanies.zip",
+  "load": "shp2pgsql",
+  "loadFiles": [
+    {
+      "file":"nyfc_17b/nyfc.shp",
+      "table": "fdny_firecompanies"
+    }
+  ],
+  "shp2pgsql": [
+    "-d",
+    "-s 4326:4326"
+  ]
+}
