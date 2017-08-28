@@ -5,4 +5,4 @@ UPDATE facilities AS f
         dcp_school_districts AS p
     WHERE
         f.geom IS NOT NULL
-        AND ST_Intersects(p.geom,f.geom)
+        AND ST_Intersects(p.wkb_geometry, f.geom)
