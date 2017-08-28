@@ -32,6 +32,7 @@ data_sources = [
     "dcp_statesenatedistricts",
     "dcp_congressionaldistricts",
     "dcp_trafficanalysiszones",
+    "dcp_school_districts",
     "doitt_zipcodes",
     "doitt_buildingfootprints",
 
