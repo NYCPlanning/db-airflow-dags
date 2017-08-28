@@ -17,4 +17,4 @@
 | School Districts             | `schooldistrict`        | ✅     |      |           |
 | State Assembly Districts     | `stateassemblydistrict` | ✅     |      |           |
 | State Senate Districts       | `statesenatedistrict`   | ✅     |      |           |
-| Traffic Analysis Zones       | `tza`                   | ✅     |      |           |
+| Traffic Analysis Zones       | `taz`                   | ✅     |      |           |

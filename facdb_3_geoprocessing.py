@@ -60,7 +60,7 @@ join_municourt = intersect_task('join_municourt')
 join_policeprecinct = intersect_task('join_policeprecinct')
 join_stateassemblydistrict = intersect_task('join_stateassemblydistrict')
 join_statesenatedistrict = intersect_task('join_statesenatedistrict')
-join_tza = intersect_task('join_tza')
+join_taz = intersect_task('join_taz')
 join_schooldistrict = intersect_task('join_schooldistrict')
 
 intersect_tasks = [
@@ -74,7 +74,7 @@ intersect_tasks = [
     join_policeprecinct,
     join_stateassemblydistrict,
     join_statesenatedistrict,
-    join_tza,
+    join_taz,
     join_schooldistrict
 ]
 

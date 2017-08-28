@@ -40,7 +40,7 @@ policeprecinct text,
 schooldistrict text,
 stateassemblydistrict text,
 statesenatedistrict text,
-tza text,
+taz text,
 -- dcp classification
 facdomain text,
 facgroup text,

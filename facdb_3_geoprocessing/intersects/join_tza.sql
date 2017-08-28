@@ -1,6 +1,6 @@
 UPDATE facilities AS f
     SET
-        tza = p.geoid10
+        taz = p.geoid10
     FROM
         dcp_trafficanalysiszones AS p
     WHERE
