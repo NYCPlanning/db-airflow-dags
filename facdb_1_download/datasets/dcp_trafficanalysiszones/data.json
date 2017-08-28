@@ -1,5 +1,5 @@
 {
-  "url": "http://data.capitalplanning.nyc/admin/TrafficAnalysisZones.geojson",
+  "url": "https://data.capitalplanning.nyc/admin/TrafficAnalysisZones.geojson",
   "saveFile": "dcp_trafficanalysiszones.json",
   "load": "org2ogr",
   "loadFiles": [
@@ -10,5 +10,5 @@
   ],
   "saveFile":"dcp_trafficanalysiszones.json",
   "ogr2ogr": [
-        ] 
+        ]
 }
