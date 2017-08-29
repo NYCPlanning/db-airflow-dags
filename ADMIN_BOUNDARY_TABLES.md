@@ -13,7 +13,7 @@
 | Fire Battalions              | `firebn`                | ✅     |      |           |
 | Fire Companies               | `fireconum`             | ✅     |      |           |
 | Municipal Court Districts    | `municourt`             | ✅     |      |           |
-| Police Precincts             | `policeprecinctjo`      | ✅     |      |           |
+| Police Precincts             | `policeprecinct`        | ✅     |      |           |
 | School Districts             | `schooldistrict`        | ✅     |      |           |
 | State Assembly Districts     | `stateassemblydistrict` | ✅     |      |           |
 | State Senate Districts       | `statesenatedistrict`   | ✅     |      |           |
